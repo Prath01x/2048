@@ -1,0 +1,52 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch TTFE",
+            "request": "launch",
+            "mainClass": "ttfe.TTFE",
+            "args": [
+                "--seed", "${input:seed}",
+                "--width", "${input:width}",
+                "--height", "${input:height}",
+                "--player", "${input:player}"],
+            "projectName": "2048"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "seed",
+            "description": "Enter a random seed.",
+            "default": "0",
+            "type": "promptString"
+        },
+        {
+            "id": "width",
+            "description": "Enter the board width.",
+            "default": "4",
+            "type": "promptString"
+        },
+        {
+            "id": "height",
+            "description": "Enter the board height.",
+            "default": "4",
+            "type": "promptString"
+        },
+        {
+            "id": "player",
+            "description": "Enter the player type. (\"h(uman)\" / \"c(omputer)\")",
+            "default": "h",
+            "type": "promptString"
+        }
+    ]
+}
