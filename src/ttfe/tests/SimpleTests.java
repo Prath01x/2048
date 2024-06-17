@@ -88,6 +88,8 @@ public class SimpleTests {
 			assertTrue("Pieces added to row 3 should have a value of 2 or 4", isValidRow);
 		}
 	}	
+	@Test
+	public void lovemove 
         
 
 
