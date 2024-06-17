@@ -1,6 +1,7 @@
 package ttfe.tests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -9,6 +10,7 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
+import ttfe.MoveDirection;
 import ttfe.SimulatorInterface;
 import ttfe.TTFEFactory;
 
@@ -37,8 +39,9 @@ public class SimpleTests {
 		assertTrue("The initial game board did not have correct height",
 				4 == game.getBoardHeight());
 	}
-	//my tests
-	//Pieceadd checking piecer after and before
+
+///my tests
+	/*/&%$%§"§"RDHOKoNJKYBSAKÖLKWPPKOWKPÜÜ*Q?`=!==??==)(****(IIOP((/(/))))=?)?)?/&%))/Pieceadd checking piecer after and before
 	@Test
 	public void padd(){
 		
@@ -87,13 +90,58 @@ public class SimpleTests {
 	
 			assertTrue("Pieces added to row 3 should have a value of 2 or 4", isValidRow);
 		}
-	}	
-	@Test
-	public void lovemove 
-        
+	}	*/
+ @Test
+    public void testIsMovePossible() {
+        // Assuming the game board is a 4x4 grid
+        int boardWidth = 4;
+        int boardHeight = 4;
 
+        // Create a new simulator with a 4x4 board
+        SimulatorInterface game = TTFEFactory.createSimulator(boardWidth, boardHeight, null);
 
+        // Set up a scenario where a move is possible
+        game.setPieceAt(0, 0, 2);
+        game.setPieceAt(0, 1, 2);
+        game.setPieceAt(1, 0, 4);
+        game.setPieceAt(1, 1, 8);
 
+        // Check if a move is possible to the EAST (should be true)
+        assertTrue("Move to the EAST should be possible", game.isMovePossible(MoveDirection.EAST));
+
+        // Check if a move is possible to the WEST (should be true)
+        assertTrue("Move to the WEST should be possible", game.isMovePossible(MoveDirection.WEST));
+
+        // Check if a move is possible to the NORTH (should be true)
+        assertTrue("Move to the NORTH should be possible", game.isMovePossible(MoveDirection.NORTH));
+
+        // Check if a move is possible to the SOUTH (should be true)
+        assertTrue("Move to the SOUTH should be possible", game.isMovePossible(MoveDirection.SOUTH));
+
+        // Set up a scenario where no move is possible
+        game.setPieceAt(0, 0, 2);
+        game.setPieceAt(0, 1, 4);
+        game.setPieceAt(0, 2, 8);
+        game.setPieceAt(0, 3, 16);
+        game.setPieceAt(1, 0, 32);
+        game.setPieceAt(1, 1, 64);
+        game.setPieceAt(1, 2, 128);
+        game.setPieceAt(1, 3, 256);
+        game.setPieceAt(2, 0, 512);
+        game.setPieceAt(2, 1, 1024);
+        game.setPieceAt(2, 2, 2048);
+        game.setPieceAt(2, 3, 4096);
+        game.setPieceAt(3, 0, 8192);
+        game.setPieceAt(3, 1, 16384);
+        game.setPieceAt(3, 2, 32768);
+        game.setPieceAt(3, 3, 65536);
+
+        // Check if a move is possible in any direction (should be false)
+        assertFalse("No move should be possible to the EAST", game.isMovePossible(MoveDirection.EAST));
+        assertFalse("No move should be possible to the WEST", game.isMovePossible(MoveDirection.WEST));
+        assertFalse("No move should be possible to the NORTH", game.isMovePossible(MoveDirection.NORTH));
+        assertFalse("No move should be possible to the SOUTH", game.isMovePossible(MoveDirection.SOUTH));
+    }
 
 		
 	
