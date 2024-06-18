@@ -49,10 +49,11 @@ public class SimpleTests {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
 		}
+	}
 	game.setPieceAt(1, 1, 2);
 	game.setPieceAt(2, 1, 2);
 	assertEquals("space availaible", true,game.isMovePossible());
- }
+
  }
  @Test 
  public void movepoo1(){
@@ -61,10 +62,11 @@ public class SimpleTests {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 2);  
 		}
+	}
 	game.setPieceAt(1, 1, 0);
 
 	assertEquals("move and merge both possible", true,game.isMovePossible());
- }
+
  }
  @Test 
  public void movepoo2(){
@@ -72,7 +74,7 @@ public class SimpleTests {
 	for (int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
-		}
+		} }
 	game.setPieceAt(0, 0, 2);
 	game.setPieceAt(1, 0, 4);
 	game.setPieceAt(2, 0, 8);
@@ -96,7 +98,7 @@ public class SimpleTests {
 
 
 	assertEquals("move should not be possible", false,game.isMovePossible());
- }
+
  }
  @Test 
  public void movepoo3(){
@@ -104,7 +106,7 @@ public class SimpleTests {
 	for (int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
-		}
+		} }
 		game.setPieceAt(0, 0, 2);
 		game.setPieceAt(1, 0, 4);
 		game.setPieceAt(2, 0, 8);
@@ -128,7 +130,7 @@ public class SimpleTests {
 
 
 	assertEquals("one move is possible", true,game.isMovePossible());
- }
+
  }
     ///test for pove possible mit richtung richtung
  @Test 
@@ -137,7 +139,7 @@ public class SimpleTests {
 	for (int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
-		}
+		} }
 		game.setPieceAt(0, 0, 2);
 		game.setPieceAt(1, 0, 4);
 		game.setPieceAt(2, 0, 8);
@@ -159,14 +161,14 @@ public class SimpleTests {
 		game.setPieceAt(3, 3, 128);
 	assertEquals("no space availaible and no tiles", false,game.isMovePossible(MoveDirection.NORTH));
  }
- }
+
  @Test 
  public void movepoorichtungnordenyes(){
 	
 	for (int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
-		}
+		} }
 		
 	
 	game.setPieceAt(1, 0, 4);
@@ -188,7 +190,7 @@ public class SimpleTests {
 	game.setPieceAt(2, 3, 8);
 	game.setPieceAt(3, 3, 128);
 	assertEquals("space availaible but not tile", true,game.isMovePossible(MoveDirection.NORTH));
- }
+
  }
  @Test 
  public void movepoorichtungnordenyest(){
@@ -196,7 +198,7 @@ public class SimpleTests {
 	for (int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
-		}
+		} }
 	game.setPieceAt(0, 0, 2);
 	game.setPieceAt(1, 0, 4);
 	game.setPieceAt(2, 0, 8);
@@ -218,7 +220,7 @@ public class SimpleTests {
 	game.setPieceAt(3, 3, 128);
 
 	assertEquals("no space availaible but  tiles are", true,game.isMovePossible(MoveDirection.NORTH));
- }
+
  }
 
 
