@@ -93,7 +93,7 @@ public class SimpleTests {
 	}	*/
  @Test 
  public void movepoo(){
-	game = TTFEFactory.createSimulator(4, 4, new Random(0));
+	
 	for (int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
@@ -105,7 +105,7 @@ public class SimpleTests {
  }
  @Test 
  public void movepoo1(){
-	game = TTFEFactory.createSimulator(4, 4, new Random(0));
+	
 	for (int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 2);  
@@ -117,7 +117,7 @@ public class SimpleTests {
  }
  @Test 
  public void movepoo2(){
-	game = TTFEFactory.createSimulator(4, 4, new Random(0));
+
 	for (int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
@@ -149,7 +149,7 @@ public class SimpleTests {
  }
  @Test 
  public void movepoo3(){
-	game = TTFEFactory.createSimulator(4, 4, new Random(0));
+	
 	for (int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
