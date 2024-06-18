@@ -74,23 +74,23 @@ public class SimpleTests {
 			game.setPieceAt(row, col, 0);  
 		}
 	game.setPieceAt(0, 0, 2);
-	game.setPieceAt(0, 1, 4);
-	game.setPieceAt(0, 2, 8);
-	game.setPieceAt(0, 3, 16);
+	game.setPieceAt(1, 0, 4);
+	game.setPieceAt(2, 0, 8);
+	game.setPieceAt(3, 0, 16);
 
-	game.setPieceAt(1, 0, 32);
+	game.setPieceAt(0, 1, 32);
 	game.setPieceAt(1, 1, 64);
-	game.setPieceAt(1, 2, 128);
-	game.setPieceAt(1, 3, 256);
+	game.setPieceAt(2, 1, 128);
+	game.setPieceAt(3, 1, 256);
 
-	game.setPieceAt(2, 0, 512);
-	game.setPieceAt(2, 1, 1024);
+	game.setPieceAt(0, 2, 512);
+	game.setPieceAt(1, 2, 1024);
 	game.setPieceAt(2, 2, 512);
-	game.setPieceAt(2, 3, 16);
+	game.setPieceAt(3, 2, 16);
 
-	game.setPieceAt(3, 0, 32);
-	game.setPieceAt(3, 1, 64);
-	game.setPieceAt(3, 2, 8);
+	game.setPieceAt(0, 3, 32);
+	game.setPieceAt(1, 3, 64);
+	game.setPieceAt(2, 3, 8);
 	game.setPieceAt(3, 3, 128);
 
 
@@ -105,32 +105,32 @@ public class SimpleTests {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
 		}
-	game.setPieceAt(0, 0, 2);
-	game.setPieceAt(0, 1, 4);
-	game.setPieceAt(0, 2, 8);
-	game.setPieceAt(0, 3, 16);
-
-	game.setPieceAt(1, 0, 32);
-	game.setPieceAt(1, 1, 64);
-	game.setPieceAt(1, 2, 128);
-	game.setPieceAt(1, 3, 256);
-
-	game.setPieceAt(2, 0, 512);
-	game.setPieceAt(2, 1, 1024);
-	game.setPieceAt(2, 2, 512);
-	game.setPieceAt(2, 3, 512);
-
-	game.setPieceAt(3, 0, 32);
-	game.setPieceAt(3, 1, 64);
-	game.setPieceAt(3, 2, 8);
-	game.setPieceAt(3, 3, 128);
+		game.setPieceAt(0, 0, 2);
+		game.setPieceAt(1, 0, 4);
+		game.setPieceAt(2, 0, 8);
+		game.setPieceAt(3, 0, 16);
+	
+		game.setPieceAt(0, 1, 32);
+		game.setPieceAt(1, 1, 64);
+		game.setPieceAt(2, 1, 128);
+		game.setPieceAt(3, 1, 256);
+	
+		game.setPieceAt(0, 2, 512);
+		game.setPieceAt(1, 2, 1024);
+		game.setPieceAt(2, 2, 16);
+		game.setPieceAt(3, 2, 16);
+	
+		game.setPieceAt(0, 3, 32);
+		game.setPieceAt(1, 3, 64);
+		game.setPieceAt(2, 3, 8);
+		game.setPieceAt(3, 3, 128);
 
 
 
 	assertEquals("one move is possible", true,game.isMovePossible());
  }
  }
-  /*  ///test for pove possible mit richtung richtung
+    ///test for pove possible mit richtung richtung
  @Test 
  public void movepoorichtungnordenno(){
 	
@@ -139,23 +139,23 @@ public class SimpleTests {
 			game.setPieceAt(row, col, 0);  
 		}
 		game.setPieceAt(0, 0, 2);
-	    game.setPieceAt(0, 1, 4);
-	    game.setPieceAt(0, 2, 8);
-	    game.setPieceAt(0, 3, 16);
-
-		game.setPieceAt(1, 0, 32);
+		game.setPieceAt(1, 0, 4);
+		game.setPieceAt(2, 0, 8);
+		game.setPieceAt(3, 0, 16);
+	
+		game.setPieceAt(0, 1, 32);
 		game.setPieceAt(1, 1, 64);
-		game.setPieceAt(1, 2, 128);
-		game.setPieceAt(1, 3, 256);
+		game.setPieceAt(2, 1, 128);
+		game.setPieceAt(3, 1, 256);
 	
-		game.setPieceAt(2, 0, 512);
-		game.setPieceAt(2, 1, 1024);
+		game.setPieceAt(0, 2, 512);
+		game.setPieceAt(1, 2, 1024);
 		game.setPieceAt(2, 2, 512);
-		game.setPieceAt(2, 3, 16);
+		game.setPieceAt(3, 2, 16);
 	
-		game.setPieceAt(3, 0, 32);
-		game.setPieceAt(3, 1, 64);
-		game.setPieceAt(3, 2, 8);
+		game.setPieceAt(0, 3, 32);
+		game.setPieceAt(1, 3, 64);
+		game.setPieceAt(2, 3, 8);
 		game.setPieceAt(3, 3, 128);
 	assertEquals("no space availaible and no tiles", false,game.isMovePossible(MoveDirection.NORTH));
  }
@@ -168,21 +168,25 @@ public class SimpleTests {
 			game.setPieceAt(row, col, 0);  
 		}
 		
-		
-		game.setPieceAt(1, 0, 32);
-		game.setPieceAt(1, 1, 64);
-		game.setPieceAt(1, 2, 128);
-		game.setPieceAt(1, 3, 256);
 	
-		game.setPieceAt(2, 0, 512);
-		game.setPieceAt(2, 1, 1024);
-		game.setPieceAt(2, 2, 512);
-		game.setPieceAt(2, 3, 16);
+	game.setPieceAt(1, 0, 4);
+	game.setPieceAt(2, 0, 8);
+	game.setPieceAt(3, 0, 16);
+
+
+	game.setPieceAt(1, 1, 64);
+	game.setPieceAt(2, 1, 128);
+	game.setPieceAt(3, 1, 256);
+
 	
-		game.setPieceAt(3, 0, 32);
-		game.setPieceAt(3, 1, 64);
-		game.setPieceAt(3, 2, 8);
-		game.setPieceAt(3, 3, 128);
+	game.setPieceAt(1, 2, 1024);
+	game.setPieceAt(2, 2, 512);
+	game.setPieceAt(3, 2, 16);
+
+	
+	game.setPieceAt(1, 3, 64);
+	game.setPieceAt(2, 3, 8);
+	game.setPieceAt(3, 3, 128);
 	assertEquals("space availaible but not tile", true,game.isMovePossible(MoveDirection.NORTH));
  }
  }
@@ -193,29 +197,30 @@ public class SimpleTests {
 		for (int col = 0; col < 4; col++) {
 			game.setPieceAt(row, col, 0);  
 		}
-		game.setPieceAt(0, 0, 2);
-	    game.setPieceAt(0, 1, 4);
-	    game.setPieceAt(0, 2, 8);
-	    game.setPieceAt(0, 3, 16);
-		
-		game.setPieceAt(1, 0, 32);
-		game.setPieceAt(1, 1, 64);
-		game.setPieceAt(1, 2, 128);
-		game.setPieceAt(1, 3, 16);
-	
-		game.setPieceAt(2, 0, 512);
-		game.setPieceAt(2, 1, 1024);
-		game.setPieceAt(2, 2, 512);
-		game.setPieceAt(2, 3, 16);
-	
-		game.setPieceAt(3, 0, 32);
-		game.setPieceAt(3, 1, 64);
-		game.setPieceAt(3, 2, 8);
-		game.setPieceAt(3, 3, 128);
-	assertEquals("space availaible but not tile", true,game.isMovePossible(MoveDirection.NORTH));
+	game.setPieceAt(0, 0, 2);
+	game.setPieceAt(1, 0, 4);
+	game.setPieceAt(2, 0, 8);
+	game.setPieceAt(3, 0, 16);
+
+	game.setPieceAt(0, 1, 32);
+	game.setPieceAt(1, 1, 64);
+	game.setPieceAt(2, 1, 128);
+	game.setPieceAt(3, 1, 256);
+
+	game.setPieceAt(0, 2, 512);
+	game.setPieceAt(1, 2, 1024);
+	game.setPieceAt(2, 2, 512);
+	game.setPieceAt(3, 2, 512);
+
+	game.setPieceAt(0, 3, 32);
+	game.setPieceAt(1, 3, 64);
+	game.setPieceAt(2, 3, 8);
+	game.setPieceAt(3, 3, 128);
+
+	assertEquals("no space availaible but  tiles are", true,game.isMovePossible(MoveDirection.NORTH));
  }
  }
-*/
+
 
 		
 	
