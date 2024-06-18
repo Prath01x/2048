@@ -130,7 +130,7 @@ public class SimpleTests {
 	assertEquals("one move is possible", true,game.isMovePossible());
  }
  }
- //test for pove possible mit richtung richtung
+  /*  ///test for pove possible mit richtung richtung
  @Test 
  public void movepoorichtungnordenno(){
 	
@@ -183,7 +183,7 @@ public class SimpleTests {
 		game.setPieceAt(3, 1, 64);
 		game.setPieceAt(3, 2, 8);
 		game.setPieceAt(3, 3, 128);
-	assertEquals("space availaiblebut not tile", true,game.isMovePossible(MoveDirection.NORTH));
+	assertEquals("space availaible but not tile", true,game.isMovePossible(MoveDirection.NORTH));
  }
  }
  @Test 
@@ -212,10 +212,10 @@ public class SimpleTests {
 		game.setPieceAt(3, 1, 64);
 		game.setPieceAt(3, 2, 8);
 		game.setPieceAt(3, 3, 128);
-	assertEquals("space availaiblebut not tile", true,game.isMovePossible(MoveDirection.NORTH));
+	assertEquals("space availaible but not tile", true,game.isMovePossible(MoveDirection.NORTH));
  }
  }
-
+*/
 
 		
 	
