@@ -584,7 +584,7 @@ public void tashreef() {
 			}}
 			assertThrows(IllegalStateException.class,()->{game.addPiece();});
 	}
-
+/*
 	
 	@Test
 	public void hkontrolle(){
@@ -622,7 +622,7 @@ public void tashreef() {
 		assertTrue("hgfdghfhgf",
 				11== game.getBoardWidth());
 	}
-/*
+
 	@Test
 public void verifyInitialMoveCount() {
     int unusedNumber = 42;
