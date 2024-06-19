@@ -411,6 +411,74 @@ public void twopiece5(){
         assertFalse("Perform movjhgd not be possible", direction.performMove(MoveDirection.NORTH));
     }
 	
+@Test
+public void getscoresouth(){
+	
+	
+	
+		game3.setPieceAt(1, 1, 2);
+		game3.setPieceAt(1, 2, 2);
+		game3.performMove(MoveDirection.SOUTH);
+		
+		
+		assertEquals("score is wrong",4,game3.getPoints());
+		
+
+}
+@Test
+public void getscorenorth(){
+	
+	
+		game3.setPieceAt(1, 1, 2);
+		game3.setPieceAt(1, 2, 2);
+		game3.performMove(MoveDirection.NORTH);
+		
+		assertEquals("score is wrong",4,game3.getPoints());
+}
+@Test
+public void getscoreeast(){
+		game3.setPieceAt(1, 1, 2);
+		game3.setPieceAt(1, 2, 2);
+		game3.performMove(MoveDirection.EAST);
+		
+		assertEquals("score is wrong",0,game3.getPoints());
+}
+@Test
+public void getscorewest(){
+	
+	
+	
+		game3.setPieceAt(1, 1, 2);
+		game3.setPieceAt(1, 2, 2);
+		game3.performMove(MoveDirection.WEST);
+		
+		assertEquals("score is wrong",0,game3.getPoints());
+		
+}
+@Test
+public void getscoresouthnomerge(){
+	
+	
+		game3.setPieceAt(1, 1, 2);
+		game3.setPieceAt(1, 2, 4);
+		game3.performMove(MoveDirection.SOUTH);
+		
+		assertEquals("score is wrong",0,game3.getPoints());
+		
+
+} 
+@Test
+public void getscorenorthnomerge(){
+	
+	
+		game3.setPieceAt(1, 1, 2);
+		game3.setPieceAt(1, 2, 4);
+		game3.performMove(MoveDirection.NORTH);
+		
+		assertEquals("score is wrong",0,game3.getPoints());
+		
+
+} 
 
 }
 
