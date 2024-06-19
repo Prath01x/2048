@@ -23,6 +23,7 @@ public class SimpleTests {
 
 	private SimulatorInterface game;
 	private SimulatorInterface game2;
+	private SimulatorInterface game3;
 	private SimulatorInterface board1;
 	private SimulatorInterface board2;
 	private SimulatorInterface board3;
@@ -94,7 +95,8 @@ public class SimpleTests {
 	   game2.setPieceAt(1, 3, 16);
 	   game2.setPieceAt(2, 3, 32);
 	   game2.setPieceAt(3, 3, 64);
-   
+
+	   game3=TTFEFactory.createSimulator(4, 4, new Random(0));
 	}
 
 	
@@ -323,8 +325,12 @@ public void twopiece5(){
 	}
 	
 	@Test
-	public void moveposs(){
+	public void movepossgame2(){
 		assertEquals("moveshouldbepossible", true,game2.isMovePossible());
+	}
+	@Test
+	public void movepossgame3(){
+		assertEquals("moveshouldbepossible", true,game3.isMovePossible());
 	}
 }
 
