@@ -1,7 +1,7 @@
 package ttfe.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -24,20 +24,12 @@ public class SimpleTests {
 	private SimulatorInterface game;
 	private SimulatorInterface board1;
 	private SimulatorInterface board2;
+	private SimulatorInterface board3;
 
 	@Before
 	public void setUp() {
 		game = TTFEFactory.createSimulator(4, 4, new Random(0));
 		board1 = TTFEFactory.createSimulator(4, 4, new Random(0));
-		board2=TTFEFactory.createSimulator(4, 4, new Random(0));
-		for (int row = 0; row < 4; row++) {
-			for (int col = 0; col < 4; col++) {
-				board2.setPieceAt(row, col, 0);  
-			}
-		}
-		board2.setPieceAt(0, 0, 4);
-		board2.setPieceAt(0, 2, 2);
-		board2.setPieceAt(0, 3, 2);
 
 		board1.setPieceAt(0, 0, 2);
 	   board1.setPieceAt(1, 0, 4);
@@ -59,6 +51,26 @@ public class SimpleTests {
 	   board1.setPieceAt(2, 3, 8);
 	   board1.setPieceAt(3, 3, 128);
    
+		board2=TTFEFactory.createSimulator(4, 4, new Random(0));
+		for (int row = 0; row < 4; row++) {
+			for (int col = 0; col < 4; col++) {
+				board2.setPieceAt(row, col, 0);  
+			}
+		}
+		board2.setPieceAt(0, 0, 4);
+		board2.setPieceAt(0, 2, 2);
+		board2.setPieceAt(0, 3, 2);
+
+		board3=TTFEFactory.createSimulator(4, 4, new Random(0));
+		for (int row = 0; row < 4; row++) {
+			for (int col = 0; col < 4; col++) {
+				board3.setPieceAt(row, col, 0);  
+			}
+		}
+		board3.setPieceAt(0, 0, 2);
+		board3.setPieceAt(0, 1, 2);
+		board3.setPieceAt(0, 2, 2);
+		board3.setPieceAt(0, 3, 2);
 	}
 
 	
@@ -212,16 +224,43 @@ public void twopiece5(){
 	public void board2(){
 		assertEquals("move should  possible", true,board2.isMovePossible());
 		assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.SOUTH));
+		assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.NORTH));
+	   assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.EAST));
+	   assertEquals("nodirection", false,board2.isMovePossible(MoveDirection.WEST));
+
 		board2.performMove(MoveDirection.SOUTH);
 		assertEquals("uhidsh",4,board2.getPieceAt(0,2));
 
 		assertEquals("move should  possible", true,board2.isMovePossible());
-		assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.NORTH));
+		assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.SOUTH));
+		assertEquals("nodirection", false,board2.isMovePossible(MoveDirection.WEST));
+	   assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.EAST));
+	   assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.NORTH));
+
 		board2.performMove(MoveDirection.NORTH);
+		assertEquals("move should  possible", true,board2.isMovePossible());
+
+		
+		assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.SOUTH));
+		assertEquals("nodirection", false,board2.isMovePossible(MoveDirection.WEST));
+	   assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.EAST));
+	   assertEquals("nodirection", false,board2.isMovePossible(MoveDirection.NORTH));
+
+
 		assertEquals("uhidsh",8,board2.getPieceAt(0,0));
 
 
 	}
+	@Test
+	public void illegalboard3() {
+        try {
+            board3.isMovePossible(null);
+            fail("IllegalArgumentException ");
+        } catch (IllegalArgumentException e) {
+            
+        }
+    }
+	
 }
 
 
