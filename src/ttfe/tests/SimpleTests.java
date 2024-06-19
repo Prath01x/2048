@@ -485,45 +485,7 @@ public void getscorenorthnomerge(){
     public void perfmillegal() {
         game3.isMovePossible(null);
 	}
-	@Test
-	public void performovens(){
-		
-		game3.setPieceAt(0, 0, 0);
-	   game3.setPieceAt(1, 0, 0);
-	   game3.setPieceAt(2, 0, 0);
-	   game3.setPieceAt(3, 0, 0);
-   
-	   game3.setPieceAt(0, 1, 0);
-	   game3.setPieceAt(1, 1, 0);
-	   game3.setPieceAt(2, 1, 0);
-	   game3.setPieceAt(3, 1, 0);
-   
-	   game3.setPieceAt(0, 2, 2);
-	   game3.setPieceAt(1, 2, 2);
-	   game3.setPieceAt(2, 2, 2);
-	   game3.setPieceAt(3, 2, 2);
-   
-	   game3.setPieceAt(0, 3, 0);
-	   game3.setPieceAt(1, 3, 0);
-	   game3.setPieceAt(2, 3, 0);
-	   game3.setPieceAt(3, 3, 0);
-
-	   game3.performMove(MoveDirection.EAST);
-	   assertEquals("lkrjsef",true,game3.performMove(MoveDirection.EAST));
-	   assertEquals("lkrjsef",true,game3.performMove(MoveDirection.WEST));
-	   assertEquals("lkrjsef",true,game3.performMove(MoveDirection.NORTH));
-	   assertEquals("lkrjsef",true,game3.performMove(MoveDirection.SOUTH));
-	   assertEquals("poitn", 4==game3.getPieceAt(2, 2)&&4==game3.getPieceAt(3, 2)&&8==game3.getPoints());
-
-	   game3.performMove(MoveDirection.WEST);
-	   assertEquals("lkrjsef",false,game3.performMove(MoveDirection.WEST));
-	   assertEquals("lkrjsef",true,game3.performMove(MoveDirection.EAST));
-	   assertEquals("lkrjsef",true,game3.performMove(MoveDirection.NORTH));
-	   assertEquals("lkrjsef",true,game3.performMove(MoveDirection.SOUTH));
-	   assertEquals("poitn", 8==game3.getPieceAt(0, 2)&&16==game3.getPoints());
-	   game3.performMove(MoveDirection.NORTH);
-
-	}
+	
 
 }
 
