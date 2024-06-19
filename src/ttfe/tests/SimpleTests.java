@@ -289,10 +289,10 @@ public void twopiece5(){
 		assertEquals("kdksjd",16,board3.getPoints());
 		assertEquals("point", 0,board3.getPieceAt(0,0));
 		assertEquals("point", 8,board3.getPieceAt(0,3));
-		assertEquals("nodirection", false,board2.isMovePossible(MoveDirection.SOUTH));
-		assertEquals("nodirection", false,board2.isMovePossible(MoveDirection.WEST));
-	   assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.EAST));
-	   assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.NORTH));
+		assertEquals("nodirection", false,board3.isMovePossible(MoveDirection.SOUTH));
+		assertEquals("nodirection", false,board3.isMovePossible(MoveDirection.WEST));
+	   assertEquals("nodirection", true,board3.isMovePossible(MoveDirection.EAST));
+	   assertEquals("nodirection", true,board3.isMovePossible(MoveDirection.NORTH));
 
 	   assertEquals("nodirection", false,board3.performMove(MoveDirection.WEST));
 	   assertEquals("nodirection", false,board3.performMove(MoveDirection.SOUTH));
