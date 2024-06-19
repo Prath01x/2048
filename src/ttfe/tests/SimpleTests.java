@@ -222,6 +222,7 @@ public void twopiece5(){
     }
 	@Test
 	public void board2(){
+		
 		assertEquals("move should  possible", true,board2.isMovePossible());
 		assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.SOUTH));
 		assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.NORTH));
@@ -229,9 +230,10 @@ public void twopiece5(){
 	   assertEquals("nodirection", false,board2.isMovePossible(MoveDirection.WEST));
 
 		board2.performMove(MoveDirection.SOUTH);
+		assertEquals("uhidsh",4,board2.getPoints());
 		assertEquals("uhidsh",4,board2.getPieceAt(0,2));
-
 		assertEquals("move should  possible", true,board2.isMovePossible());
+
 		assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.SOUTH));
 		assertEquals("nodirection", false,board2.isMovePossible(MoveDirection.WEST));
 	   assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.EAST));
@@ -239,7 +241,8 @@ public void twopiece5(){
 
 		board2.performMove(MoveDirection.NORTH);
 		assertEquals("move should  possible", true,board2.isMovePossible());
-
+		assertEquals("uhidsh",12,board2.getPoints());
+		assertEquals("uhidsh",8,board2.getPieceAt(0,0));
 		
 		assertEquals("nodirection", true,board2.isMovePossible(MoveDirection.SOUTH));
 		assertEquals("nodirection", false,board2.isMovePossible(MoveDirection.WEST));
@@ -247,7 +250,7 @@ public void twopiece5(){
 	   assertEquals("nodirection", false,board2.isMovePossible(MoveDirection.NORTH));
 
 
-		assertEquals("uhidsh",8,board2.getPieceAt(0,0));
+		
 
 
 	}
