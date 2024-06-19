@@ -597,24 +597,14 @@ public void anonymous() {
     
     assertEquals("ghfgfhhgffgcf", 3, randomCount);
 }
-
-	@Test
-public void checkFullBoardAdd() {
-    int x = 0;
-    int y = 0;
-
-    while (x < game.getBoardHeight()) {
-        y = 0;
-        while (y < game.getBoardWidth()) {
-            game.setPieceAt(x, y, 4);
-            y++;
-        }
-        x++;
-    }
-    
-    assertThrows(IllegalStateException.class, () -> {game.addPiece();});
-}
-
+@Test
+	public void testaddonfull(){
+		for (int x=0;x<game.getBoardHeight();x++){
+			for(int y=0;y<game.getBoardWidth();y++){
+				game.setPieceAt(x, y, 4);
+			}}
+			assertThrows(IllegalStateException.class,()->{game.addPiece();});
+	}
 
 	
 	@Test
@@ -653,7 +643,7 @@ public void checkFullBoardAdd() {
 		assertTrue("hgfdghfhgf",
 				11== game.getBoardWidth());
 	}
-	
+	/* 
 	@Test
 public void verifyInitialMoveCount() {
     int unusedNumber = 42;
@@ -667,7 +657,7 @@ public void verifyInitialMoveCount() {
     unusedString = "Unused code updated";
 }
 
-/* 
+
 
 @Test
 public void findMovesDoneByNow() {
