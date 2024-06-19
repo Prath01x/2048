@@ -582,7 +582,7 @@ public void tashreef() {
 			}}
 			assertThrows(IllegalStateException.class,()->{game.addPiece();});
 	}
-/*
+
 	
 	@Test
 	public void hkontrolle(){
@@ -634,7 +634,7 @@ public void verifyInitialMoveCount() {
     unusedString = "Unused code updated";
 }
 
-
+/*
 
 @Test
 public void findMovesDoneByNow() {
