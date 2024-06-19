@@ -2,6 +2,7 @@ package ttfe.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -547,7 +548,157 @@ assertTrue("uhrefai", game3.performMove(MoveDirection.EAST));
 assertTrue("uhrefai",game3.performMove(MoveDirection.WEST));
 	}
 	
+//Elli
+@Test
+	public void adding() {
+		int before = game.getNumPieces();
+		game.addPiece();
+		int after = game.getNumPieces();
+		assertTrue("1 piece must be added to game board", 
+		before+1 == after);
+	}
 
+	@Test
+	public void testboardfull() {
+		int numPie = game.getNumPieces();
+		if (numPie== 16){
+			assertThrows(IllegalStateException.class,()->{game.addPiece();});
+		}
+		else{
+			game.addPiece();
+			int after = game.getNumPieces();
+		assertTrue("1 piece must be added to game board", 
+		numPie+1 == after);
+		}
+	}
+	
+
+	
+	@Test
+	public void testadd2or4(){
+		game = TTFEFactory.createSimulator(4, 4, new Random(0));
+		int count= 0;
+		game.addPiece();
+		for (int x=0;x<game.getBoardHeight();x++){
+			for(int y=0;y<game.getBoardWidth();y++){
+				if (game.getPieceAt(x, y)	==2||game.getPieceAt(x, y)==4){
+					count+=1;
+				}
+			}
+		}
+		assertEquals("djjdjdjd", 3,count);
+	}
+	//tests for get
+	@Test
+	public void testaddonfull(){
+		for (int x=0;x<game.getBoardHeight();x++){
+			for(int y=0;y<game.getBoardWidth();y++){
+				game.setPieceAt(x, y, 4);
+			}}
+			assertThrows(IllegalStateException.class,()->{game.addPiece();});
+	}
+	//test for getboardheight
+	@Test
+	public void checkheight(){
+		game = TTFEFactory.createSimulator(4, 5, new Random(0));
+		assertTrue("The initial game board did not have correct height",
+				5== game.getBoardHeight());
+	}
+	@Test
+	public void checkheight1(){
+		game = TTFEFactory.createSimulator(4, 6, new Random(0));
+		assertTrue("The initial game board did not have correct height",
+				6== game.getBoardHeight());
+	}
+	@Test
+	public void checkheight2(){
+		game = TTFEFactory.createSimulator(4, 7, new Random(0));
+		assertTrue("The initial game board did not have correct height",
+				7== game.getBoardHeight());
+	}
+	@Test
+	public void checkwidth(){
+		game = TTFEFactory.createSimulator(4, 4, new Random(0));
+		assertTrue("The initial game board did not have correct height",
+				4== game.getBoardWidth());
+	}
+	@Test
+	public void checkwidth1(){
+		game = TTFEFactory.createSimulator(3, 4, new Random(0));
+		assertTrue("The initial game board did not have correct height",
+				3== game.getBoardWidth());
+	}
+	@Test
+	public void checkwidth2(){
+		game = TTFEFactory.createSimulator(2, 4, new Random(0));
+		assertTrue("The initial game board did not have correct height",
+				2== game.getBoardWidth());
+	}
+	@Test
+	public void checknummoves(){
+		game = TTFEFactory.createSimulator(4, 4, new Random(0));
+		int movessofar = game.getNumMoves();
+		assertTrue("two moves were performed", 0==movessofar);
+	}
+
+	//get number of moves tests+perform move
+	@Test
+	public void getmoves(){
+		game = TTFEFactory.createSimulator(4, 4, new Random(0));
+		for (int x=0;x<game.getBoardHeight();x++){
+			for(int y=0;y<game.getBoardWidth();y++){
+				game.setPieceAt(x, y, 0);
+			}}
+			
+			game.setPieceAt(0,1, 2);
+			game.setPieceAt(0, 2, 2);
+			game.setPieceAt(2, 1, 4);
+			game.setPieceAt(2, 2, 4);
+			game.setPieceAt(2, 0, 8);
+			boolean j=game.performMove(MoveDirection.SOUTH);
+			if(j==true){
+				assertEquals("getnumofmovesiswrong", 1,game.getNumMoves());
+			}else{
+				assertEquals("dsnjkc", j);
+			}
+			
+			
+	}
+	 
+	//getnumofpieces
+	@Test
+	public void getnumpieces(){
+		game = TTFEFactory.createSimulator(4, 4, new Random(0));
+		for (int x=0;x<game.getBoardHeight();x++){
+			for(int y=0;y<game.getBoardWidth();y++){
+				game.setPieceAt(x, y, 0);
+			}}
+			assertEquals("numbofpieces in begeinning must be zero", 0,game.getNumPieces());
+}
+@Test
+	public void getnumpieces1(){
+		game = TTFEFactory.createSimulator(4, 4, new Random(0));
+		for (int x=0;x<game.getBoardHeight();x++){
+			for(int y=0;y<game.getBoardWidth();y++){
+				game.setPieceAt(x, y, 0);
+			}}
+			game.setPieceAt(0, 0, 2);
+			game.setPieceAt(1, 2, 4);
+			game.setPieceAt(1, 1, 8);
+
+			assertEquals("numbofpieces in begeinning must be three", 3,game.getNumPieces());
+}
+@Test
+	public void getnumpieces2(){
+		game = TTFEFactory.createSimulator(4, 4, new Random(0));
+		for (int x=0;x<game.getBoardHeight();x++){
+			for(int y=0;y<game.getBoardWidth();y++){
+				game.setPieceAt(x, y, 2);
+			}}
+			
+
+			assertEquals("numbofpieces in begeinning must be sixteen", 16,game.getNumPieces());
+}
 
 }
 
