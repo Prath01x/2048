@@ -490,10 +490,10 @@ public void getscorenorthnomerge(){
 	
 	@Test
 	public void nspo(){
-game3.setPieceAt(0, 0, 2);
-game3.setPieceAt(1, 0, 4);
-game3.setPieceAt(2, 0, 16);
-game3.setPieceAt(3, 0, 32);
+game3.setPieceAt(0, 0, 32);
+game3.setPieceAt(1, 0, 16);
+game3.setPieceAt(2, 0, 2);
+game3.setPieceAt(3, 0, 4);
 
 game3.setPieceAt(0, 1, 32);
 game3.setPieceAt(1, 1, 16);
@@ -510,11 +510,41 @@ game3.setPieceAt(1, 3, 16);
 game3.setPieceAt(2, 3, 2);
 game3.setPieceAt(3, 3, 4);
 
-assertEquals("hgfish",true, game3.isMovePossible());
-assertEquals("uhrefai", false,game3.performMove(MoveDirection.EAST));
-assertEquals("uhrefai", false,game3.performMove(MoveDirection.WEST));
-assertEquals("uhrefai", true,game3.performMove(MoveDirection.NORTH));
-assertEquals("uhrefai", true,game3.performMove(MoveDirection.SOUTH));
+
+assertTrue("hgfish", game3.isMovePossible());
+assertFalse("uhrefai", 	game3.performMove(MoveDirection.EAST));
+assertFalse("uhrefai", 	game3.performMove(MoveDirection.WEST));
+assertTrue("uhrefai", game3.performMove(MoveDirection.NORTH));
+assertTrue("uhrefai",game3.performMove(MoveDirection.SOUTH));
+	}
+	@Test
+	public void ewpo(){
+game3.setPieceAt(0, 0, 32);
+game3.setPieceAt(1, 0, 32);
+game3.setPieceAt(2, 0, 32);
+game3.setPieceAt(3, 0, 32);
+
+game3.setPieceAt(0, 1, 16);
+game3.setPieceAt(1, 1, 16);
+game3.setPieceAt(2, 1, 16);
+game3.setPieceAt(3, 1, 16);
+
+game3.setPieceAt(0, 2, 2);
+game3.setPieceAt(1, 2, 2);
+game3.setPieceAt(2, 2, 2);
+game3.setPieceAt(3, 2, 2);
+
+game3.setPieceAt(0, 3, 4);
+game3.setPieceAt(1, 3, 4);
+game3.setPieceAt(2, 3, 4);
+game3.setPieceAt(3, 3, 4);
+
+
+assertTrue("hgfish", game3.isMovePossible());
+assertFalse("uhrefai", 	game3.performMove(MoveDirection.NORTH));
+assertFalse("uhrefai", 	game3.performMove(MoveDirection.SOUTH));
+assertTrue("uhrefai", game3.performMove(MoveDirection.EAST));
+assertTrue("uhrefai",game3.performMove(MoveDirection.WEST));
 	}
 	
 
