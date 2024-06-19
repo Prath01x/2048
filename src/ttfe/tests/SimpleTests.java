@@ -277,7 +277,7 @@ public class SimpleTests {
 	assertEquals("no space availaible and no tiles", true,game.isMovePossible(MoveDirection.EAST));
  }
 		
- @Test 
+ @Test
  public void movepoorichtungostenyes(){
 	
 	for (int row = 0; row < 4; row++) {
@@ -304,6 +304,10 @@ public class SimpleTests {
 		game.setPieceAt(2, 3, 8);
 		
 	assertEquals("no space availaible and no tiles", true,game.isMovePossible(MoveDirection.EAST));
+ }
+ @Test(expected = IllegalArgumentException.class)
+ public void testIsMovePossibleWithNullDirection() {
+	 game.isMovePossible(null);
  }
 	
 
