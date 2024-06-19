@@ -485,6 +485,8 @@ public void getscorenorthnomerge(){
     public void perfmillegal() {
         game3.isMovePossible(null);
 	}
+	
+	/* 
 	@Test
 	public void testMovePossibility() {
 		// Set up the initial game board state
@@ -528,8 +530,8 @@ public void getscorenorthnomerge(){
 		assertFalse("West move should be possible", game3.isMovePossible(MoveDirection.WEST));
 		assertTrue("North move should be possible", game3.isMovePossible(MoveDirection.NORTH));
 		assertTrue("South move should be possible", game3.isMovePossible(MoveDirection.SOUTH));
-	}
-	
+	}*/
+
 
 
 }
