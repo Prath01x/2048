@@ -22,13 +22,35 @@ import ttfe.TTFEFactory;
 public class SimpleTests {
 
 	private SimulatorInterface game;
-	
+	private SimulatorInterface board1;
 
 	@Before
 	public void setUp() {
 		game = TTFEFactory.createSimulator(4, 4, new Random(0));
-		
+		board1 = TTFEFactory.createSimulator(4, 4, new Random(0));
+
+		board1.setPieceAt(0, 0, 2);
+	   board1.setPieceAt(1, 0, 4);
+	   board1.setPieceAt(2, 0, 0);
+	   board1.setPieceAt(3, 0, 0);
+   
+	   board1.setPieceAt(0, 1, 4);
+	   board1.setPieceAt(1, 1, 8);
+	   board1.setPieceAt(2, 1, 0);
+	   board1.setPieceAt(3, 1, 0);
+   
+	   board1.setPieceAt(0, 2, 16);
+	   board1.setPieceAt(1, 2, 32);
+	   board1.setPieceAt(2, 2, 4);
+	   board1.setPieceAt(3, 2, 2);
+   
+	   board1.setPieceAt(0, 3, 2);
+	   board1.setPieceAt(1, 3, 2048);
+	   board1.setPieceAt(2, 3, 8);
+	   board1.setPieceAt(3, 3, 128);
+   
 	}
+
 	
 	@Test
 	public void testInitialGamePoints() {
@@ -101,10 +123,16 @@ public void twopiece5(){
 	game.setPieceAt(0, 1, 2);
 	assertEquals("east poss", true,game.isMovePossible(MoveDirection.SOUTH));
 }
-@Test(expected = IllegalArgumentException.class)
-    public void testIsMovePossibleWithNullDirection() {
-        game.isMovePossible(null);
+@Test
+    public void illegalgame() {
+        try {
+            game.isMovePossible(null);
+            fail("IllegalArgumentException ");
+        } catch (IllegalArgumentException e) {
+            
+        }
     }
+
 	@Test 
 	public void movepoo2(){
    
@@ -141,9 +169,30 @@ public void twopiece5(){
 	   assertEquals("nodirection", false,game.isMovePossible(MoveDirection.SOUTH));
 	}
 
+	@Test 
+	public void movepoo3(){
+   
+	 
+       
+	   assertEquals("move should not be possible", true,board1.isMovePossible());
+	   assertEquals("nodirection", true,board1.isMovePossible(MoveDirection.NORTH));
+	   assertEquals("nodirection", true,board1.isMovePossible(MoveDirection.EAST));
+	   assertEquals("nodirection", false,board1.isMovePossible(MoveDirection.WEST));
+	   assertEquals("nodirection", false,board1.isMovePossible(MoveDirection.SOUTH));
+	}
+	@Test
+	public void illegalboard1() {
+        try {
+            board1.isMovePossible(null);
+            fail("IllegalArgumentException ");
+        } catch (IllegalArgumentException e) {
+            
+        }
+    }
+}
+
 
 
 
 
  
-}
