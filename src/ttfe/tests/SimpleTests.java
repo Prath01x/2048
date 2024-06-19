@@ -377,7 +377,41 @@ public void twopiece5(){
         assertFalse("Perform movejhg not be possible", direction.performMove(MoveDirection.EAST));
         assertFalse("Perform movjhgd not be possible", direction.performMove(MoveDirection.NORTH));
     }
+	// bis jetyt alles okay
+	@Test
+    public void East() {
+		direction.setPieceAt(0, 0, 8);
+        direction.setPieceAt(0, 1, 16);
+        direction.setPieceAt(0, 2, 32);
+        direction.setPieceAt(0, 3, 64);
+		assertTrue("Mohjsible", direction.isMovePossible());
+        assertTrue("Move sojhgpossible", direction.isMovePossible(MoveDirection.EAST));
+        assertFalse("Move westfje possible", direction.isMovePossible(MoveDirection.WEST));
+        assertFalse("Move east sjhgt be possible", direction.isMovePossible(MoveDirection.SOUTH));
+        assertFalse("Move northjhgt be possible", direction.isMovePossible(MoveDirection.NORTH));
+
+        assertFalse("Perform mojhgnot be possible", direction.performMove(MoveDirection.WEST));
+        assertFalse("Perform movejhg not be possible", direction.performMove(MoveDirection.SOUTH));
+        assertFalse("Perform movjhgd not be possible", direction.performMove(MoveDirection.NORTH));
+    }
+	@Test
+    public void West() {
+		direction.setPieceAt(3, 0, 8);
+        direction.setPieceAt(3, 1, 16);
+        direction.setPieceAt(3, 2, 32);
+        direction.setPieceAt(3, 3, 64);
+		assertTrue("Mohjsible", direction.isMovePossible());
+        assertTrue("Move sojhgpossible", direction.isMovePossible(MoveDirection.WEST));
+        assertFalse("Move westfje possible", direction.isMovePossible(MoveDirection.EAST));
+        assertFalse("Move east sjhgt be possible", direction.isMovePossible(MoveDirection.SOUTH));
+        assertFalse("Move northjhgt be possible", direction.isMovePossible(MoveDirection.NORTH));
+
+        assertFalse("Perform mojhgnot be possible", direction.performMove(MoveDirection.EAST));
+        assertFalse("Perform movejhg not be possible", direction.performMove(MoveDirection.SOUTH));
+        assertFalse("Perform movjhgd not be possible", direction.performMove(MoveDirection.NORTH));
+    }
 	
+
 }
 
 
