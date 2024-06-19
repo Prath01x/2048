@@ -584,57 +584,16 @@ public void tashreef() {
 	}
 
 	
-	@Test
-	public void hkontrolle(){
-		game = TTFEFactory.createSimulator(4, 4, new Random(0));
-		assertTrue("erstrgsdthgtt",
-				4== game.getBoardHeight());
-	}
-	@Test
-	public void hkoontrolle0(){
-		game = TTFEFactory.createSimulator(4, 6, new Random(0));
-		assertTrue("hgjfghjdfghjdf",
-				6== game.getBoardHeight());
-	}
-	@Test
-	public void hkoontrolle1(){
-		game = TTFEFactory.createSimulator(4, 9, new Random(0));
-		assertTrue("hgjfghfgfhdt",
-				9== game.getBoardHeight());
-	}
-	@Test
-	public void wkontrolle0(){
-		game = TTFEFactory.createSimulator(4, 4, new Random(0));
-		assertTrue("Tjhghgjhgjhjg",
-				4== game.getBoardWidth());
-	}
-	@Test
-	public void wkontrolle1(){
-		game = TTFEFactory.createSimulator(1, 4, new Random(0));
-		assertTrue("jhgthrzhtrstfhd",
-				1== game.getBoardWidth());
-	}
-	@Test
-	public void wkontrolle(){
-		game = TTFEFactory.createSimulator(11, 4, new Random(0));
-		assertTrue("hgfdghfhgf",
-				11== game.getBoardWidth());
-	}
+
 
 	@Test
 public void verifyInitialMoveCount() {
-    int unusedNumber = 42;
-    String unusedString = "This is unused code";
+ 
+    assertTrue("Initial number of moves should be zero", 0 == game3.getNumMoves());
 
-     game = TTFEFactory.createSimulator(4, 4, new Random(0));
-    int initialMoveCount = game.getNumMoves();
-    assertTrue("Initial number of moves should be zero", 0 == initialMoveCount);
-
-    unusedNumber = 24;
-    unusedString = "Unused code updated";
 }
 
-/*
+
 
 @Test
 public void findMovesDoneByNow() {
@@ -674,7 +633,7 @@ public void findMovesDoneByNow() {
 
 			assertEquals("numbofpieces in begeinning must be sixteen", 16,direction.getNumPieces());
 }
-/* */
+
 }
 
 
