@@ -511,8 +511,8 @@ game3.setPieceAt(2, 3, 2);
 game3.setPieceAt(3, 3, 4);
 
 assertEquals("hgfish",true, game3.isMovePossible());
-assertEquals("uhrefai", true,game3.performMove(MoveDirection.EAST));
-assertEquals("uhrefai", true,game3.performMove(MoveDirection.WEST));
+assertEquals("uhrefai", false,game3.performMove(MoveDirection.EAST));
+assertEquals("uhrefai", false,game3.performMove(MoveDirection.WEST));
 assertEquals("uhrefai", true,game3.performMove(MoveDirection.NORTH));
 assertEquals("uhrefai", true,game3.performMove(MoveDirection.SOUTH));
 	}
