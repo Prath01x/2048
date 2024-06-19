@@ -485,7 +485,52 @@ public void getscorenorthnomerge(){
     public void perfmillegal() {
         game3.isMovePossible(null);
 	}
+	@Test
+	public void testMovePossibility() {
+		// Set up the initial game board state
+		game3.setPieceAt(0, 0, 0);
+		game3.setPieceAt(1, 0, 0);
+		game3.setPieceAt(2, 0, 0);
+		game3.setPieceAt(3, 0, 0);
+	   
+		game3.setPieceAt(0, 1, 0);
+		game3.setPieceAt(1, 1, 0);
+		game3.setPieceAt(2, 1, 0);
+		game3.setPieceAt(3, 1, 0);
+	   
+		game3.setPieceAt(0, 2, 2);
+		game3.setPieceAt(1, 2, 2);
+		game3.setPieceAt(2, 2, 2);
+		game3.setPieceAt(3, 2, 2);
+	   
+		game3.setPieceAt(0, 3, 0);
+		game3.setPieceAt(1, 3, 0);
+		game3.setPieceAt(2, 3, 0);
+		game3.setPieceAt(3, 3, 0);
 	
+		// Check if moves are possible
+		assertTrue("East move should be possible", game3.isMovePossible(MoveDirection.EAST));
+		assertTrue("West move should be possible", game3.isMovePossible(MoveDirection.WEST));
+		assertTrue("North move should be possible", game3.isMovePossible(MoveDirection.NORTH));
+		assertTrue("South move should be possible", game3.isMovePossible(MoveDirection.SOUTH));
+	
+		// Perform moves (simulation), if necessary, and then validate game state
+		game3.performMove(MoveDirection.EAST);
+		assertEquals("After simulating EAST move", 4, game3.getPieceAt(2, 2));
+		assertEquals("After simulating EAST move", 4, game3.getPieceAt(3, 2));
+		assertEquals("After simulating EAST move", 8, game3.getPoints());
+	
+		game3.performMove(MoveDirection.WEST);
+		assertEquals("After simulating WEST move", 8, game3.getPieceAt(0, 2));
+		assertEquals("After simulating WEST move", 16, game3.getPoints());
+
+		assertTrue("East move should be possible", game3.isMovePossible(MoveDirection.EAST));
+		assertFalse("West move should be possible", game3.isMovePossible(MoveDirection.WEST));
+		assertTrue("North move should be possible", game3.isMovePossible(MoveDirection.NORTH));
+		assertTrue("South move should be possible", game3.isMovePossible(MoveDirection.SOUTH));
+	}
+	
+
 
 }
 
