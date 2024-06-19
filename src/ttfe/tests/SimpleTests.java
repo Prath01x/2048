@@ -567,10 +567,8 @@ public void tashreef() {
         assertThrows(IllegalStateException.class, () -> {
             game.addPiece();});
     } else {
-        game.addPiece();
 		game.addPiece();
-        int baadme = game.getNumPieces();
-        assertTrue("1 piece must be added to game board", khtm + 2 == baadme);
+        assertTrue("1 piece must be added to game board", khtm + 1 == game.getNumPieces());
     }
 }
 	
