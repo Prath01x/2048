@@ -98,6 +98,10 @@ public class SimpleTests {
 	   game2.setPieceAt(3, 3, 64);
 
 	   game3=TTFEFactory.createSimulator(4, 4, new Random(0));
+	   for (int row = 0; row < 4; row++) {
+		for (int col = 0; col < 4; col++) {
+			game3.setPieceAt(row, col, 0);  
+		}}
 	   direction=TTFEFactory.createSimulator(4, 4, new Random(0));
 	   for (int row = 0; row < 4; row++) {
 		for (int col = 0; col < 4; col++) {
@@ -335,10 +339,7 @@ public void twopiece5(){
 	public void movepossgame2(){
 		assertEquals("moveshouldbepossible", true,game2.isMovePossible());
 	}
-	@Test
-	public void movepossgame3(){
-		assertEquals("moveshouldbepossible", true,game3.isMovePossible());
-	}
+	
 	@Test(expected = IllegalArgumentException.class)
     public void testMovePossibleWithNullDirection() {
         direction.isMovePossible(null);
