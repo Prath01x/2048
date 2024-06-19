@@ -1,7 +1,7 @@
 package ttfe.tests;
 
 import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -27,6 +27,7 @@ public class SimpleTests {
 	private SimulatorInterface board1;
 	private SimulatorInterface board2;
 	private SimulatorInterface board3;
+	private SimulatorInterface direction;
 
 	@Before
 	public void setUp() {
@@ -97,6 +98,12 @@ public class SimpleTests {
 	   game2.setPieceAt(3, 3, 64);
 
 	   game3=TTFEFactory.createSimulator(4, 4, new Random(0));
+	   direction=TTFEFactory.createSimulator(4, 4, new Random(0));
+	   for (int row = 0; row < 4; row++) {
+		for (int col = 0; col < 4; col++) {
+			direction.setPieceAt(row, col, 0);  
+		}}
+	
 	}
 
 	
@@ -332,6 +339,45 @@ public void twopiece5(){
 	public void movepossgame3(){
 		assertEquals("moveshouldbepossible", true,game3.isMovePossible());
 	}
+	@Test(expected = IllegalArgumentException.class)
+    public void testMovePossibleWithNullDirection() {
+        direction.isMovePossible(null);
+    }																			
+	@Test
+	public void north(){
+		
+		direction.setPieceAt(0, 3, 8);
+		direction.setPieceAt(1, 3, 16);
+		direction.setPieceAt(2, 3, 32);
+		direction.setPieceAt(3, 3, 64);
+		assertTrue("moveposs",true==direction.isMovePossible());
+		assertTrue("moveposs",true==direction.isMovePossible(MoveDirection.NORTH));
+	   assertEquals("nodirection", false,direction.isMovePossible(MoveDirection.WEST));
+	   assertEquals("nodirection", false,direction.isMovePossible(MoveDirection.EAST));
+	   assertEquals("nodirection", false,direction.isMovePossible(MoveDirection.SOUTH));
+
+	   assertEquals("nodirection", false,direction.performMove(MoveDirection.WEST));
+	   assertEquals("nodirection", false,direction.performMove(MoveDirection.EAST));
+	   assertEquals("nodirection", false,direction.performMove(MoveDirection.SOUTH));
+		
+	}
+	@Test
+    public void South() {
+		direction.setPieceAt(3, 0, 8);
+        direction.setPieceAt(2, 0, 16);
+        direction.setPieceAt(1, 0, 32);
+        direction.setPieceAt(0, 0, 64);
+		assertTrue("Mohjsible", direction.isMovePossible());
+        assertTrue("Move sojhgpossible", direction.isMovePossible(MoveDirection.SOUTH));
+        assertFalse("Move westfje possible", direction.isMovePossible(MoveDirection.WEST));
+        assertFalse("Move east sjhgt be possible", direction.isMovePossible(MoveDirection.EAST));
+        assertFalse("Move northjhgt be possible", direction.isMovePossible(MoveDirection.NORTH));
+
+        assertFalse("Perform mojhgnot be possible", direction.performMove(MoveDirection.WEST));
+        assertFalse("Perform movejhg not be possible", direction.performMove(MoveDirection.EAST));
+        assertFalse("Perform movjhgd not be possible", direction.performMove(MoveDirection.NORTH));
+    }
+	
 }
 
 
