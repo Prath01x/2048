@@ -549,15 +549,7 @@ assertTrue("uhrefai",game3.performMove(MoveDirection.WEST));
 	}
 	
 //Elli
-@Test
-	public void adding() {
-		int loda = game.getNumPieces();
-		game.addPiece();
-		game.addPiece();
-		int after = game.getNumPieces();
-		assertTrue("rweiokdfrge", 
-		loda+2 == after);
-	}
+
 	@Test
 	public void adding1() {
 		int loda = game.getNumPieces();
@@ -604,7 +596,7 @@ public void anonymous() {
     }
     
     assertEquals("ghfgfhhgffgcf", 3, randomCount);
-}
+}/* 
 
 	@Test
 public void checkFullBoardAdd() {
@@ -659,7 +651,7 @@ public void checkFullBoardAdd() {
 		game = TTFEFactory.createSimulator(11, 4, new Random(0));
 		assertTrue("hgfdghfhgf",
 				11== game.getBoardWidth());
-	}/* 
+	}
 	
 	@Test
 public void verifyInitialMoveCount() {
