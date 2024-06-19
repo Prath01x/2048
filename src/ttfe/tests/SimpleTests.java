@@ -481,6 +481,11 @@ public void getscorenorthnomerge(){
 
 } 
 
+	@Test(expected = IllegalArgumentException.class)
+    public void perfmillegal() {
+        game3.isMovePossible(null);
+	}
+
 }
 
 
