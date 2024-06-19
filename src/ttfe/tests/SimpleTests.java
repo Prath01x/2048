@@ -588,7 +588,7 @@ public void tashreef() {
 
 	@Test
 public void verifyInitialMoveCount() {
- 
+	game3=TTFEFactory.createSimulator(4, 4, new Random(0));TTFEFactory.createSimulator(4, 4, new Random(0));
     assertTrue("Initial number of moves should be zero", 0 == game3.getNumMoves());
 
 }
@@ -633,7 +633,7 @@ public void findMovesDoneByNow() {
 
 			assertEquals("numbofpieces in begeinning must be sixteen", 16,direction.getNumPieces());
 }
-
+/* */
 }
 
 
