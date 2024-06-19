@@ -596,7 +596,7 @@ public void anonymous() {
     }
     
     assertEquals("ghfgfhhgffgcf", 3, randomCount);
-}/* 
+}
 
 	@Test
 public void checkFullBoardAdd() {
@@ -614,6 +614,7 @@ public void checkFullBoardAdd() {
     
     assertThrows(IllegalStateException.class, () -> {game.addPiece();});
 }
+
 
 	
 	@Test
@@ -666,7 +667,7 @@ public void verifyInitialMoveCount() {
     unusedString = "Unused code updated";
 }
 
-
+/* 
 
 @Test
 public void findMovesDoneByNow() {
