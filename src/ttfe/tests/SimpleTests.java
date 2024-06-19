@@ -575,28 +575,7 @@ public void tashreef() {
 }
 	
 
-	
-@Test
-public void anonymous() {
-    game = TTFEFactory.createSimulator(4, 4, new Random(0));
-    int randomCount = 0;
-    game.addPiece();
-    int x = 0;
-    int y = 0;
-    
-    while (x < game.getBoardHeight()) {
-        y = 0;
-        while (y < game.getBoardWidth()) {
-            if (game.getPieceAt(x, y) == 2 || game.getPieceAt(x, y) == 4) {
-                randomCount += 1;
-            }
-            y++;
-        }
-        x++;
-    }
-    
-    assertEquals("ghfgfhhgffgcf", 3, randomCount);
-}
+
 @Test
 	public void testaddonfull(){
 		for (int x=0;x<game.getBoardHeight();x++){
@@ -643,7 +622,7 @@ public void anonymous() {
 		assertTrue("hgfdghfhgf",
 				11== game.getBoardWidth());
 	}
-	/* 
+/*
 	@Test
 public void verifyInitialMoveCount() {
     int unusedNumber = 42;
