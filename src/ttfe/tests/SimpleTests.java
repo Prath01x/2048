@@ -189,7 +189,7 @@ public class SimpleTests {
 	assertEquals("space availaible but not tile", true,game.isMovePossible(MoveDirection.NORTH));
 
  }
- /* 
+ 
  @Test 
  public void movepoorichtungnordenyest(){
 	
@@ -210,7 +210,7 @@ public class SimpleTests {
 	game.setPieceAt(0, 2, 512);
 	game.setPieceAt(1, 2, 1024);
 	game.setPieceAt(2, 2, 512);
-	game.setPieceAt(3, 2, 512);
+	game.setPieceAt(3, 2, 256);
 
 	game.setPieceAt(0, 3, 32);
 	game.setPieceAt(1, 3, 64);
@@ -219,7 +219,7 @@ public class SimpleTests {
 
 	assertEquals("no space availaible but  tiles are", true,game.isMovePossible(MoveDirection.NORTH));
 
- }*/
+ }
 
 
 		
