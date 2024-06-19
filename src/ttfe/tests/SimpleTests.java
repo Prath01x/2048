@@ -22,6 +22,7 @@ import ttfe.TTFEFactory;
 public class SimpleTests {
 
 	private SimulatorInterface game;
+	private SimulatorInterface game2;
 	private SimulatorInterface board1;
 	private SimulatorInterface board2;
 	private SimulatorInterface board3;
@@ -71,6 +72,29 @@ public class SimpleTests {
 		board3.setPieceAt(0, 1, 2);
 		board3.setPieceAt(0, 2, 2);
 		board3.setPieceAt(0, 3, 2);
+
+		
+		game2=TTFEFactory.createSimulator(4, 4, new Random(0));
+		game2.setPieceAt(0, 0, 2);
+	   game2.setPieceAt(1, 0, 2);
+	   game2.setPieceAt(2, 0, 8);
+	   game2.setPieceAt(3, 0, 16);
+   
+	   game2.setPieceAt(0, 1, 32);
+	   game2.setPieceAt(1, 1, 64);
+	   game2.setPieceAt(2, 1, 128);
+	   game2.setPieceAt(3, 1, 256);
+   
+	   game2.setPieceAt(0, 2, 512);
+	   game2.setPieceAt(1, 2, 1024);
+	   game2.setPieceAt(2, 2, 2);
+	   game2.setPieceAt(3, 2, 4);
+   
+	   game2.setPieceAt(0, 3, 8);
+	   game2.setPieceAt(1, 3, 16);
+	   game2.setPieceAt(2, 3, 32);
+	   game2.setPieceAt(3, 3, 64);
+   
 	}
 
 	
@@ -298,6 +322,10 @@ public void twopiece5(){
 	   assertEquals("nodirection", false,board3.performMove(MoveDirection.SOUTH));
 	}
 	
+	@Test
+	public void moveposs(){
+		assertEquals("moveshouldbepossible", true,game2.isMovePossible());
+	}
 }
 
 
