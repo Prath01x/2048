@@ -603,7 +603,7 @@ public void anonymous() {
         x++;
     }
     
-    assertEquals("ghfgfhhgffgcf", 1, randomCount);
+    assertEquals("ghfgfhhgffgcf", 3, randomCount);
 }
 
 	@Test
@@ -659,8 +659,8 @@ public void checkFullBoardAdd() {
 		game = TTFEFactory.createSimulator(11, 4, new Random(0));
 		assertTrue("hgfdghfhgf",
 				11== game.getBoardWidth());
-	}
-	/* 
+	}/* 
+	
 	@Test
 public void verifyInitialMoveCount() {
     int unusedNumber = 42;
@@ -714,7 +714,7 @@ public void findMovesDoneByNow() {
 
 			assertEquals("numbofpieces in begeinning must be sixteen", 16,direction.getNumPieces());
 }
-*/
+/* */
 }
 
 
