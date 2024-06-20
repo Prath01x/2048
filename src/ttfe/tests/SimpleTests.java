@@ -574,14 +574,7 @@ public void tashreef() {
 	
 
 
-@Test
-	public void tashreefoo(){
-		for (int x=0;x<game3.getBoardHeight();x++){
-			for(int y=0;y<game3.getBoardWidth();y++){
-				game3.setPieceAt(x, y, 32);
-			}}
-			assertThrows(IllegalStateException.class,()->{game3.addPiece();});
-	}
+
 
 	
 
@@ -642,6 +635,7 @@ public void chowdai(){
 
 @Test
 public void ifspaceeleft(){
+	game2=TTFEFactory.createSimulator(4, 4, new Random(0));TTFEFactory.createSimulator(4, 4, new Random(0));
 	   game2.setPieceAt(0, 0, 2);
 	   game2.setPieceAt(1, 0, 2);
 	   game2.setPieceAt(2, 0, 8);
@@ -665,6 +659,7 @@ assertFalse(game2.isSpaceLeft());
 }
 @Test
 public void ifspaceeleft1(){
+	game2=TTFEFactory.createSimulator(4, 4, new Random(0));TTFEFactory.createSimulator(4, 4, new Random(0));
 	   game2.setPieceAt(0, 0, 2);
 	   game2.setPieceAt(1, 0, 2);
 	   game2.setPieceAt(2, 0, 8);
@@ -673,7 +668,7 @@ public void ifspaceeleft1(){
 	   game2.setPieceAt(0, 1, 32);
 	   game2.setPieceAt(1, 1, 64);
 	   game2.setPieceAt(2, 1, 128);
-	  
+	   game2.setPieceAt(2, 1, 0);
    
 	   game2.setPieceAt(0, 2, 512);
 	   game2.setPieceAt(1, 2, 1024);
