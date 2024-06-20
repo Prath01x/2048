@@ -682,7 +682,7 @@ public void ifspaceeleft1(){
 assertTrue(game2.isSpaceLeft());
 }
 @Test
-public void ifboardfull(){
+public void ifboardvolll(){
 	for (int x=0;x<game.getBoardHeight();x++){
 		for(int y=0;y<game.getBoardWidth();y++){
 			game.setPieceAt(x, y, 2);
