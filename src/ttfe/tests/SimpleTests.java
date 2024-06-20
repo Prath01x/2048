@@ -568,7 +568,7 @@ public void tashreef() {
             game.addPiece();});
     } else {
 		game.addPiece();
-        assertTrue("1 piece must be added to game board", khtm + 1 == game.getNumPieces());
+        assertTrue("ek piece reh gya", khtm + 1 == game.getNumPieces());
     }
 }
 	
@@ -681,7 +681,14 @@ public void ifspaceeleft1(){
 	   game2.setPieceAt(3, 3, 64);
 assertTrue(game2.isSpaceLeft());
 }
-
+@Test
+public void testaddonfull(){
+	for (int x=0;x<game.getBoardHeight();x++){
+		for(int y=0;y<game.getBoardWidth();y++){
+			game.setPieceAt(x, y, 4);
+		}}
+		assertThrows(IllegalStateException.class,()->{game.addPiece();});
+}
 
 }
 
