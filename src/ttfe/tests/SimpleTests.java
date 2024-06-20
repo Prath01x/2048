@@ -682,10 +682,10 @@ public void ifspaceeleft1(){
 assertTrue(game2.isSpaceLeft());
 }
 @Test
-public void testaddonfull(){
+public void ifboardfull(){
 	for (int x=0;x<game.getBoardHeight();x++){
 		for(int y=0;y<game.getBoardWidth();y++){
-			game.setPieceAt(x, y, 4);
+			game.setPieceAt(x, y, 2);
 		}}
 		assertThrows(IllegalStateException.class,()->{game.addPiece();});
 }
