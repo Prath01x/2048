@@ -575,12 +575,12 @@ public void tashreef() {
 
 
 @Test
-	public void testaddonfull(){
-		for (int x=0;x<game.getBoardHeight();x++){
-			for(int y=0;y<game.getBoardWidth();y++){
-				game.setPieceAt(x, y, 4);
+	public void tashreefoo(){
+		for (int x=0;x<game3.getBoardHeight();x++){
+			for(int y=0;y<game3.getBoardWidth();y++){
+				game3.setPieceAt(x, y, 32);
 			}}
-			assertThrows(IllegalStateException.class,()->{game.addPiece();});
+			assertThrows(IllegalStateException.class,()->{game3.addPiece();});
 	}
 
 	
@@ -589,7 +589,7 @@ public void tashreef() {
 	@Test
 public void verifyInitialMoveCount() {
 	game3=TTFEFactory.createSimulator(4, 4, new Random(0));TTFEFactory.createSimulator(4, 4, new Random(0));
-    assertTrue("Initial number of moves should be zero", 0 == game3.getNumMoves());
+    assertTrue("gzcjfijuhi", 0 == game3.getNumMoves());
 
 }
 
@@ -606,12 +606,12 @@ public void findMovesDoneByNow() {
    
     game3.performMove(MoveDirection.SOUTH);
 
-    assertEquals("getnumof moves are wrong", 1, game3.getNumMoves());
+    assertEquals("rsdtujncz", 1, game3.getNumMoves());
 }	 	
 @Test
 	public void findamoutofpieces(){
 	
-			assertEquals("numbofpieces in begeinning must be zero", 0,direction.getNumPieces());
+			assertEquals("rtzudjhgf", 0,direction.getNumPieces());
 }
 @Test
 	public void findamoutofpieces1(){
@@ -620,7 +620,7 @@ public void findMovesDoneByNow() {
 			direction.setPieceAt(2, 2, 16);
 			direction.setPieceAt(1, 3, 16);
 			direction.setPieceAt(1, 2, 16);
-			assertEquals("numbofpieces in begeinning must be three", 4,direction.getNumPieces());
+			assertEquals("ztruzdu", 4,direction.getNumPieces());
 }
 @Test
 	public void findamoutofpieces2(){
@@ -631,9 +631,63 @@ public void findMovesDoneByNow() {
 			}}
 			
 
-			assertEquals("numbofpieces in begeinning must be sixteen", 16,direction.getNumPieces());
+			assertEquals("rtensrtzrwt", 16,direction.getNumPieces());
 }
-/* */
+@Test
+public void chowdai(){
+	game3=TTFEFactory.createSimulator(4, 4, new Random(0));TTFEFactory.createSimulator(4, 4, new Random(0));
+    assertTrue("gzcjfijuhi", 4 == game3.getBoardHeight());
+	assertTrue("gzcjfijuhi", 4 == game3.getBoardWidth());
+}
+
+@Test
+public void ifspaceeleft(){
+	   game2.setPieceAt(0, 0, 2);
+	   game2.setPieceAt(1, 0, 2);
+	   game2.setPieceAt(2, 0, 8);
+	   game2.setPieceAt(3, 0, 16);
+   
+	   game2.setPieceAt(0, 1, 32);
+	   game2.setPieceAt(1, 1, 64);
+	   game2.setPieceAt(2, 1, 128);
+	   game2.setPieceAt(3, 1, 256);
+   
+	   game2.setPieceAt(0, 2, 512);
+	   game2.setPieceAt(1, 2, 1024);
+	   game2.setPieceAt(2, 2, 2);
+	   game2.setPieceAt(3, 2, 4);
+   
+	   game2.setPieceAt(0, 3, 8);
+	   game2.setPieceAt(1, 3, 16);
+	   game2.setPieceAt(2, 3, 32);
+	   game2.setPieceAt(3, 3, 64);
+assertFalse(game2.isSpaceLeft());
+}
+@Test
+public void ifspaceeleft1(){
+	   game2.setPieceAt(0, 0, 2);
+	   game2.setPieceAt(1, 0, 2);
+	   game2.setPieceAt(2, 0, 8);
+	   game2.setPieceAt(3, 0, 16);
+   
+	   game2.setPieceAt(0, 1, 32);
+	   game2.setPieceAt(1, 1, 64);
+	   game2.setPieceAt(2, 1, 128);
+	  
+   
+	   game2.setPieceAt(0, 2, 512);
+	   game2.setPieceAt(1, 2, 1024);
+	   game2.setPieceAt(2, 2, 2);
+	   game2.setPieceAt(3, 2, 4);
+   
+	   game2.setPieceAt(0, 3, 8);
+	   game2.setPieceAt(1, 3, 16);
+	   game2.setPieceAt(2, 3, 32);
+	   game2.setPieceAt(3, 3, 64);
+assertTrue(game2.isSpaceLeft());
+}
+
+
 }
 
 
