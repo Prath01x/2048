@@ -13,9 +13,7 @@ public class Simulator implements SimulatorInterface {
     private int bord[][];
   
     public Simulator(int width, int height, Random random) {
-		if (width != 4 || height != 4) {
-			throw new IllegalArgumentException("Width and height must be at least 2.");
-		}
+		
 		this.wi = width;
 		this.he = height;
 		this.ran = random;
@@ -92,14 +90,79 @@ public class Simulator implements SimulatorInterface {
     }
     @Override
     public boolean isMovePossible() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isMovePossible'");
+        for (MoveDirection direction : MoveDirection.values()) {
+            if (isMovePossible(direction)) {
+                return true;
+            }
+        }
+        return false;
     }
+    private boolean ifmovenorthpossible(){
+        for (int x = 0; x < wi; x++) {
+            for (int y = 1; y < he; y++) {
+                if (bord[y][x] != 0 && (bord[y - 1][x] == 0 || bord[y - 1][x] == bord[y][x])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    
+
+    }
+    private boolean ifmovesouthpossible(){
+        for (int x = 0; x < wi; x++) {
+            for (int y = he - 2; y >= 0; y--) {
+                if (bord[y][x] != 0 && (bord[y + 1][x] == 0 || bord[y + 1][x] == bord[y][x])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private boolean ifmovewestpossible(){
+        for (int y = 0; y < he; y++) {
+            for (int x = 1; x < wi; x++) {
+                if (bord[y][x] != 0 && (bord[y][x - 1] == 0 || bord[y][x - 1] == bord[y][x])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private boolean ismoveeastpossible(){
+        for (int y = 0; y < he; y++) {
+            for (int x = wi - 2; x >= 0; x--) {
+                if (bord[y][x] != 0 && (bord[y][x + 1] == 0 || bord[y][x + 1] == bord[y][x])) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    
+
+
+    
     @Override
     public boolean isMovePossible(MoveDirection direction) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isMovePossible'");
+        if (direction == null) {
+            throw new IllegalArgumentException("Direction cannot be null.");
+        }
+        switch (direction) {
+            case NORTH:
+                return ifmovenorthpossible();
+            case SOUTH:
+                return ifmovesouthpossible();
+            case WEST:
+                return ifmovewestpossible();
+            case EAST:
+                return ismoveeastpossible();
+            default:
+                throw new IllegalArgumentException("Unknown direction: " + direction);
+        }
     }
+    
     @Override
     public boolean isSpaceLeft() {
         for (int y = 0; y < he; y++) {

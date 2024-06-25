@@ -18,7 +18,12 @@ public class TTFEFactory {
 	 */
 	public static SimulatorInterface createSimulator(int width, int height,
 			Random r) {
-		
+				if ((width != 4 || height != 4)) {
+					throw new IllegalArgumentException("Width and height must be at least 2.");
+				}
+				if(r==null){
+					throw new IllegalArgumentException("r cant be zero");
+				}
 				return new Simulator(width, height, r);
 			}
 
