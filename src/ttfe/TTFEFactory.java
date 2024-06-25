@@ -18,9 +18,9 @@ public class TTFEFactory {
 	 */
 	public static SimulatorInterface createSimulator(int width, int height,
 			Random r) {
-		// TODO: Implement me. Return a simulator instance.
-		return null;
-	}
+		
+				return new Simulator(width, height, r);
+			}
 
 	/**
 	 * Create a user interface for a 2048 simulator.
