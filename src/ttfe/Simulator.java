@@ -194,222 +194,197 @@ public class Simulator implements SimulatorInterface {
 /* */
 private boolean moveUp() {
     boolean moved = false;
-    // Loop through each column
+    
+    // First pass: move all tiles up to fill empty spaces
     for (int x = 0; x < wi; x++) {
-        // Use an array to track merged tiles for this column
+        for (int y = 1; y < he; y++) {
+            int newY = y;
+            while (newY > 0 && bord[newY - 1][x] == 0) {
+                bord[newY - 1][x] = bord[newY][x];
+                bord[newY][x] = 0;
+                newY--;
+                moved = true;
+            }
+        }
+    }
+    
+    // Second pass: merge tiles
+    for (int x = 0; x < wi; x++) {
         int[] merged = new int[he];
-        
-        // Start from the second row and move upwards
         for (int y = 1; y < he; y++) {
             if (bord[y][x] != 0) {
-                int newY = y;
-                
-                // Move the tile upwards as far as there are empty spaces
-                while (newY > 0 && (bord[newY - 1][x] == 0 || bord[newY - 1][x] == bord[y][x])) {
-                    if (bord[newY - 1][x] == 0) {
-                        // Move the tile up
-                        bord[newY - 1][x] = bord[newY][x];
-                        bord[newY][x] = 0;
-                        newY--;
-                        moved = true;
-                    } else if (bord[newY - 1][x] == bord[y][x] && merged[newY - 1] == 0) {
-                        // Merge with the tile above
-                        bord[newY - 1][x] *= 2;
-                        bord[newY][x] = 0;
-                        points += bord[newY - 1][x];
-                        merged[newY - 1] = 1;
-                        moved = true;
-                        break; // Exit the loop after merging once
-                    }
+                if (bord[y - 1][x] == bord[y][x] && merged[y - 1] == 0) {
+                    bord[y - 1][x] *= 2;
+                    bord[y][x] = 0;
+                    points += bord[y - 1][x];
+                    merged[y - 1] = 1;
+                    moved = true;
                 }
             }
         }
     }
+    
+    // Third pass: move again to fill empty spaces created by merges
+    for (int x = 0; x < wi; x++) {
+        for (int y = 1; y < he; y++) {
+            int newY = y;
+            while (newY > 0 && bord[newY - 1][x] == 0) {
+                bord[newY - 1][x] = bord[newY][x];
+                bord[newY][x] = 0;
+                newY--;
+                moved = true;
+            }
+        }
+    }
+    
     return moved;
 }
 
-   /* private boolean moveDown() {
-        boolean moved = false;
-        for (int x = 0; x < wi; x++) {
-            int[] merged = new int[he];
-            for (int y = he - 2; y >= 0; y--) {
-                if (bord[y][x] != 0) {
-                    int newY = y;
-                    while (newY < he - 1 && bord[newY + 1][x] == 0) {
-                        bord[newY + 1][x] = bord[newY][x];
-                        bord[newY][x] = 0;
-                        newY++;
-                        moved = true;
-                    }
-                    if (newY < he - 1 && bord[newY + 1][x] == bord[newY][x] && merged[newY + 1] == 0) {
-                        bord[newY + 1][x] *= 2;
-                        bord[newY][x] = 0;
-                        points += bord[newY + 1][x];
-                        merged[newY + 1] = 1;
-                        moved = true;
-                    }
-                }
+private boolean moveDown() {
+    boolean moved = false;
+
+    // First pass: move all tiles down to fill empty spaces
+    for (int x = 0; x < wi; x++) {
+        for (int y = he - 2; y >= 0; y--) {
+            int newY = y;
+            while (newY < he - 1 && bord[newY + 1][x] == 0) {
+                bord[newY + 1][x] = bord[newY][x];
+                bord[newY][x] = 0;
+                newY++;
+                moved = true;
             }
         }
-        return moved;
     }
-    private boolean moveLeft() {
-        boolean moved = false;
-        for (int y = 0; y < he; y++) {
-            int[] merged = new int[wi];
-            for (int x = 1; x < wi; x++) {
-                if (bord[y][x] != 0) {
-                    int newX = x;
-                    while (newX > 0 && bord[y][newX - 1] == 0) {
-                        bord[y][newX - 1] = bord[y][newX];
-                        bord[y][newX] = 0;
-                        newX--;
-                        moved = true;
-                    }
-                    if (newX > 0 && bord[y][newX - 1] == bord[y][newX] && merged[newX - 1] == 0) {
-                        bord[y][newX - 1] *= 2;
-                        bord[y][newX] = 0;
-                        points += bord[y][newX - 1];
-                        merged[newX - 1] = 1;
-                        moved = true;
-                    }
+
+    // Second pass: merge tiles
+    for (int x = 0; x < wi; x++) {
+        int[] merged = new int[he];
+        for (int y = he - 2; y >= 0; y--) {
+            if (bord[y][x] != 0) {
+                if (bord[y + 1][x] == bord[y][x] && merged[y + 1] == 0) {
+                    bord[y + 1][x] *= 2;
+                    bord[y][x] = 0;
+                    points += bord[y + 1][x];
+                    merged[y + 1] = 1;
+                    moved = true;
                 }
             }
         }
-        return moved;
     }
-    private boolean moveRight() {
-        boolean moved = false;
-        for (int y = 0; y < he; y++) {
-            int[] merged = new int[wi];
-            for (int x = wi - 2; x >= 0; x--) {
-                if (bord[y][x] != 0) {
-                    int newX = x;
-                    while (newX < wi - 1 && bord[y][newX + 1] == 0) {
-                        bord[y][newX + 1] = bord[y][newX];
-                        bord[y][newX] = 0;
-                        newX++;
-                        moved = true;
-                    }
-                    if (newX < wi - 1 && bord[y][newX + 1] == bord[y][newX] && merged[newX + 1] == 0) {
-                        bord[y][newX + 1] *= 2;
-                        bord[y][newX] = 0;
-                        points += bord[y][newX + 1];
-                        merged[newX + 1] = 1;
-                        moved = true;
-                    }
-                }
+
+    // Third pass: move again to fill empty spaces created by merges
+    for (int x = 0; x < wi; x++) {
+        for (int y = he - 2; y >= 0; y--) {
+            int newY = y;
+            while (newY < he - 1 && bord[newY + 1][x] == 0) {
+                bord[newY + 1][x] = bord[newY][x];
+                bord[newY][x] = 0;
+                newY++;
+                moved = true;
             }
         }
-       
-        return moved;
-    }*/ 
-    private boolean moveDown() {
-        boolean moved = false;
-        // Loop through each column
-        for (int x = 0; x < wi; x++) {
-            // Use an array to track merged tiles for this column
-            int[] merged = new int[he];
-            
-            // Start from the second last row and move downwards
-            for (int y = he - 2; y >= 0; y--) {
-                if (bord[y][x] != 0) {
-                    int newY = y;
-                    
-                    // Move the tile downwards as far as there are empty spaces
-                    while (newY < he - 1 && (bord[newY + 1][x] == 0 || bord[newY + 1][x] == bord[y][x])) {
-                        if (bord[newY + 1][x] == 0) {
-                            // Move the tile down
-                            bord[newY + 1][x] = bord[newY][x];
-                            bord[newY][x] = 0;
-                            newY++;
-                            moved = true;
-                        } else if (bord[newY + 1][x] == bord[y][x] && merged[newY + 1] == 0) {
-                            // Merge with the tile below
-                            bord[newY + 1][x] *= 2;
-                            bord[newY][x] = 0;
-                            points += bord[newY + 1][x];
-                            merged[newY + 1] = 1;
-                            moved = true;
-                            break; // Exit the loop after merging once
-                        }
-                    }
-                }
-            }
-        }
-        return moved;
     }
-    private boolean moveLeft() {
-        boolean moved = false;
-        // Loop through each row
-        for (int y = 0; y < he; y++) {
-            // Use an array to track merged tiles for this row
-            int[] merged = new int[wi];
-            
-            // Start from the second column and move leftwards
-            for (int x = 1; x < wi; x++) {
-                if (bord[y][x] != 0) {
-                    int newX = x;
-                    
-                    // Move the tile leftwards as far as there are empty spaces
-                    while (newX > 0 && (bord[y][newX - 1] == 0 || bord[y][newX - 1] == bord[y][x])) {
-                        if (bord[y][newX - 1] == 0) {
-                            // Move the tile left
-                            bord[y][newX - 1] = bord[y][newX];
-                            bord[y][newX] = 0;
-                            newX--;
-                            moved = true;
-                        } else if (bord[y][newX - 1] == bord[y][x] && merged[newX - 1] == 0) {
-                            // Merge with the tile to the left
-                            bord[y][newX - 1] *= 2;
-                            bord[y][newX] = 0;
-                            points += bord[y][newX - 1];
-                            merged[newX - 1] = 1;
-                            moved = true;
-                            break; // Exit the loop after merging once
-                        }
-                    }
+
+    return moved;
+}
+
+private boolean moveLeft() {
+    boolean moved = false;
+
+    // First pass: move all tiles left to fill empty spaces
+    for (int y = 0; y < he; y++) {
+        for (int x = 1; x < wi; x++) {
+            int newX = x;
+            while (newX > 0 && bord[y][newX - 1] == 0) {
+                bord[y][newX - 1] = bord[y][newX];
+                bord[y][newX] = 0;
+                newX--;
+                moved = true;
+            }
+        }
+    }
+
+    // Second pass: merge tiles
+    for (int y = 0; y < he; y++) {
+        int[] merged = new int[wi];
+        for (int x = 1; x < wi; x++) {
+            if (bord[y][x] != 0) {
+                if (bord[y][x - 1] == bord[y][x] && merged[x - 1] == 0) {
+                    bord[y][x - 1] *= 2;
+                    bord[y][x] = 0;
+                    points += bord[y][x - 1];
+                    merged[x - 1] = 1;
+                    moved = true;
                 }
             }
         }
-        return moved;
     }
-    private boolean moveRight() {
-        boolean moved = false;
-        // Loop through each row
-        for (int y = 0; y < he; y++) {
-            // Use an array to track merged tiles for this row
-            int[] merged = new int[wi];
-            
-            // Start from the second last column and move rightwards
-            for (int x = wi - 2; x >= 0; x--) {
-                if (bord[y][x] != 0) {
-                    int newX = x;
-                    
-                    // Move the tile rightwards as far as there are empty spaces
-                    while (newX < wi - 1 && (bord[y][newX + 1] == 0 || bord[y][newX + 1] == bord[y][x])) {
-                        if (bord[y][newX + 1] == 0) {
-                            // Move the tile right
-                            bord[y][newX + 1] = bord[y][newX];
-                            bord[y][newX] = 0;
-                            newX++;
-                            moved = true;
-                        } else if (bord[y][newX + 1] == bord[y][x] && merged[newX + 1] == 0) {
-                            // Merge with the tile to the right
-                            bord[y][newX + 1] *= 2;
-                            bord[y][newX] = 0;
-                            points += bord[y][newX + 1];
-                            merged[newX + 1] = 1;
-                            moved = true;
-                            break; // Exit the loop after merging once
-                        }
-                    }
+
+    // Third pass: move again to fill empty spaces created by merges
+    for (int y = 0; y < he; y++) {
+        for (int x = 1; x < wi; x++) {
+            int newX = x;
+            while (newX > 0 && bord[y][newX - 1] == 0) {
+                bord[y][newX - 1] = bord[y][newX];
+                bord[y][newX] = 0;
+                newX--;
+                moved = true;
+            }
+        }
+    }
+
+    return moved;
+}
+
+private boolean moveRight() {
+    boolean moved = false;
+
+    // First pass: move all tiles right to fill empty spaces
+    for (int y = 0; y < he; y++) {
+        for (int x = wi - 2; x >= 0; x--) {
+            int newX = x;
+            while (newX < wi - 1 && bord[y][newX + 1] == 0) {
+                bord[y][newX + 1] = bord[y][newX];
+                bord[y][newX] = 0;
+                newX++;
+                moved = true;
+            }
+        }
+    }
+
+    // Second pass: merge tiles
+    for (int y = 0; y < he; y++) {
+        int[] merged = new int[wi];
+        for (int x = wi - 2; x >= 0; x--) {
+            if (bord[y][x] != 0) {
+                if (bord[y][x + 1] == bord[y][x] && merged[x + 1] == 0) {
+                    bord[y][x + 1] *= 2;
+                    bord[y][x] = 0;
+                    points += bord[y][x + 1];
+                    merged[x + 1] = 1;
+                    moved = true;
                 }
             }
         }
-        return moved;
     }
-            
+
+    // Third pass: move again to fill empty spaces created by merges
+    for (int y = 0; y < he; y++) {
+        for (int x = wi - 2; x >= 0; x--) {
+            int newX = x;
+            while (newX < wi - 1 && bord[y][newX + 1] == 0) {
+                bord[y][newX + 1] = bord[y][newX];
+                bord[y][newX] = 0;
+                newX++;
+                moved = true;
+            }
+        }
+    }
+
+    return moved;
+}
+
+    
     
 
 
