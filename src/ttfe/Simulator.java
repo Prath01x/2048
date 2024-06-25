@@ -344,145 +344,200 @@ private boolean moveRight() {
 */private boolean moveUp() {
     boolean moved = false;
 
-    for (int x = 0; x < wi; x++) {
-        int[] merged = new int[he];
-
-        // Move tiles upwards in each column
-        for (int y = 1; y < he; y++) {
-            if (bord[y][x] != 0) {
-                int newY = y;
-
-                // Move the tile up as far as there are empty spaces
-                while (newY > 0 && (bord[newY - 1][x] == 0 || bord[newY - 1][x] == bord[y][x])) {
-                    if (bord[newY - 1][x] == 0) {
-                        // Move the tile up
-                        bord[newY - 1][x] = bord[newY][x];
-                        bord[newY][x] = 0;
-                        newY--;
-                        moved = true;
-                    } else if (bord[newY - 1][x] == bord[y][x] && merged[newY - 1] == 0) {
-                        // Merge with the tile above
-                        bord[newY - 1][x] *= 2;
-                        bord[newY][x] = 0;
-                        points += bord[newY - 1][x];
-                        merged[newY - 1] = 1;
-                        moved = true;
-                        break; // Exit the loop after merging once
-                    }
+    // First pass: move all tiles up to fill empty spaces
+    for (int col = 0; col < wi; col++) {
+        int count = 0;
+        for (int row = 0; row < he; row++) {
+            if (bord[row][col] != 0) {
+                bord[count][col] = bord[row][col];
+                if (count != row) {
+                    bord[row][col] = 0;
+                    moved = true;
                 }
+                count++;
+            }
+        }
+    }
+
+    // Second pass: merge tiles
+    for (int col = 0; col < wi; col++) {
+        for (int row = 0; row < he - 1; row++) {
+            if (bord[row][col] != 0 && bord[row][col] == bord[row + 1][col]) {
+                bord[row][col] *= 2;
+                bord[row + 1][col] = 0;
+                points += bord[row][col];
+                moved = true;
+            }
+        }
+    }
+
+    // Third pass: move again to fill empty spaces created by merges
+    for (int col = 0; col < wi; col++) {
+        int count = 0;
+        for (int row = 0; row < he; row++) {
+            if (bord[row][col] != 0) {
+                bord[count][col] = bord[row][col];
+                if (count != row) {
+                    bord[row][col] = 0;
+                    moved = true;
+                }
+                count++;
             }
         }
     }
 
     return moved;
 }
+
 
 private boolean moveLeft() {
     boolean moved = false;
 
-    for (int y = 0; y < he; y++) {
-        int[] merged = new int[wi];
-
-        // Move tiles to the left in each row
-        for (int x = 1; x < wi; x++) {
-            if (bord[y][x] != 0) {
-                int newX = x;
-
-                // Move the tile left as far as there are empty spaces
-                while (newX > 0 && (bord[y][newX - 1] == 0 || bord[y][newX - 1] == bord[y][x])) {
-                    if (bord[y][newX - 1] == 0) {
-                        // Move the tile left
-                        bord[y][newX - 1] = bord[y][x];
-                        bord[y][x] = 0;
-                        newX--;
-                        moved = true;
-                    } else if (bord[y][newX - 1] == bord[y][x] && merged[newX - 1] == 0) {
-                        // Merge with the tile to the left
-                        bord[y][newX - 1] *= 2;
-                        bord[y][x] = 0;
-                        points += bord[y][newX - 1];
-                        merged[newX - 1] = 1;
-                        moved = true;
-                        break; // Exit the loop after merging once
-                    }
+    // First pass: move all tiles left to fill empty spaces
+    for (int row = 0; row < he; row++) {
+        int count = 0;
+        for (int col = 0; col < wi; col++) {
+            if (bord[row][col] != 0) {
+                bord[row][count] = bord[row][col];
+                if (count != col) {
+                    bord[row][col] = 0;
+                    moved = true;
                 }
+                count++;
+            }
+        }
+    }
+
+    // Second pass: merge tiles
+    for (int row = 0; row < he; row++) {
+        for (int col = 0; col < wi - 1; col++) {
+            if (bord[row][col] != 0 && bord[row][col] == bord[row][col + 1]) {
+                bord[row][col] *= 2;
+                bord[row][col + 1] = 0;
+                points += bord[row][col];
+                moved = true;
+                break; // Make sure to break after the first merge
+            }
+        }
+    }
+
+    // Third pass: move again to fill empty spaces created by merges
+    for (int row = 0; row < he; row++) {
+        int count = 0;
+        for (int col = 0; col < wi; col++) {
+            if (bord[row][col] != 0) {
+                bord[row][count] = bord[row][col];
+                if (count != col) {
+                    bord[row][col] = 0;
+                    moved = true;
+                }
+                count++;
             }
         }
     }
 
     return moved;
 }
+
 
 private boolean moveRight() {
     boolean moved = false;
 
-    for (int y = 0; y < he; y++) {
-        int[] merged = new int[wi];
-
-        // Move tiles to the right in each row
-        for (int x = wi - 2; x >= 0; x--) {
-            if (bord[y][x] != 0) {
-                int newX = x;
-
-                // Move the tile right as far as there are empty spaces
-                while (newX < wi - 1 && (bord[y][newX + 1] == 0 || bord[y][newX + 1] == bord[y][x])) {
-                    if (bord[y][newX + 1] == 0) {
-                        // Move the tile right
-                        bord[y][newX + 1] = bord[y][x];
-                        bord[y][x] = 0;
-                        newX++;
-                        moved = true;
-                    } else if (bord[y][newX + 1] == bord[y][x] && merged[newX + 1] == 0) {
-                        // Merge with the tile to the right
-                        bord[y][newX + 1] *= 2;
-                        bord[y][x] = 0;
-                        points += bord[y][newX + 1];
-                        merged[newX + 1] = 1;
-                        moved = true;
-                        break; // Exit the loop after merging once
-                    }
+    // First pass: move all tiles right to fill empty spaces
+    for (int row = 0; row < he; row++) {
+        int count = 0;
+        for (int col = wi - 1; col >= 0; col--) {
+            if (bord[row][col] != 0) {
+                bord[row][wi - 1 - count] = bord[row][col];
+                if (wi - 1 - count != col) {
+                    bord[row][col] = 0;
+                    moved = true;
                 }
+                count++;
+            }
+        }
+    }
+
+    // Second pass: merge tiles
+    for (int row = 0; row < he; row++) {
+        for (int col = wi - 1; col > 0; col--) {
+            if (bord[row][col] != 0 && bord[row][col] == bord[row][col - 1]) {
+                bord[row][col] *= 2;
+                bord[row][col - 1] = 0;
+                points += bord[row][col];
+                moved = true;
+                break; // Make sure to break after the first merge
+            }
+        }
+    }
+
+    // Third pass: move again to fill empty spaces created by merges
+    for (int row = 0; row < he; row++) {
+        int count = 0;
+        for (int col = wi - 1; col >= 0; col--) {
+            if (bord[row][col] != 0) {
+                bord[row][wi - 1 - count] = bord[row][col];
+                if (wi - 1 - count != col) {
+                    bord[row][col] = 0;
+                    moved = true;
+                }
+                count++;
             }
         }
     }
 
     return moved;
 }
+
 private boolean moveDown() {
     boolean moved = false;
 
-    for (int x = 0; x < wi; x++) {
-        int[] merged = new int[he];
-
-        // Move tiles downwards in each column
-        for (int y = he - 2; y >= 0; y--) {
-            if (bord[y][x] != 0) {
-                int newY = y;
-
-                // Move the tile down as far as there are empty spaces
-                while (newY < he - 1 && (bord[newY + 1][x] == 0 || bord[newY + 1][x] == bord[y][x])) {
-                    if (bord[newY + 1][x] == 0) {
-                        // Move the tile down
-                        bord[newY + 1][x] = bord[newY][x];
-                        bord[newY][x] = 0;
-                        newY++;
-                        moved = true;
-                    } else if (bord[newY + 1][x] == bord[y][x] && merged[newY + 1] == 0) {
-                        // Merge with the tile below
-                        bord[newY + 1][x] *= 2;
-                        bord[newY][x] = 0;
-                        points += bord[newY + 1][x];
-                        merged[newY + 1] = 1;
-                        moved = true;
-                        break; // Exit the loop after merging once
-                    }
+    // First pass: move all tiles down to fill empty spaces
+    for (int col = 0; col < wi; col++) {
+        int count = 0;
+        for (int row = he - 1; row >= 0; row--) {
+            if (bord[row][col] != 0) {
+                bord[he - 1 - count][col] = bord[row][col];
+                if (he - 1 - count != row) {
+                    bord[row][col] = 0;
+                    moved = true;
                 }
+                count++;
+            }
+        }
+    }
+
+    // Second pass: merge tiles
+    for (int col = 0; col < wi; col++) {
+        for (int row = he - 1; row > 0; row--) {
+            if (bord[row][col] != 0 && bord[row][col] == bord[row - 1][col]) {
+                bord[row][col] *= 2;
+                bord[row - 1][col] = 0;
+                points += bord[row][col];
+                moved = true;
+                break; // Make sure to break after the first merge
+            }
+        }
+    }
+
+    // Third pass: move again to fill empty spaces created by merges
+    for (int col = 0; col < wi; col++) {
+        int count = 0;
+        for (int row = he - 1; row >= 0; row--) {
+            if (bord[row][col] != 0) {
+                bord[he - 1 - count][col] = bord[row][col];
+                if (he - 1 - count != row) {
+                    bord[row][col] = 0;
+                    moved = true;
+                }
+                count++;
             }
         }
     }
 
     return moved;
 }
+
 
     
 
