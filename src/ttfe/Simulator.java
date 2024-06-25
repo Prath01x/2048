@@ -111,7 +111,8 @@ public class Simulator implements SimulatorInterface {
         }
         return false;
     }
-    private boolean ifmovenorthpossible(){
+    
+    private boolean ifMoveNorthPossible() {
         for (int x = 0; x < wi; x++) {
             for (int y = 1; y < he; y++) {
                 if (bord[y][x] != 0 && (bord[y - 1][x] == 0 || bord[y - 1][x] == bord[y][x])) {
@@ -120,10 +121,9 @@ public class Simulator implements SimulatorInterface {
             }
         }
         return false;
-    
-
     }
-    private boolean ifmovesouthpossible(){
+    
+    private boolean ifMoveSouthPossible() {
         for (int x = 0; x < wi; x++) {
             for (int y = he - 2; y >= 0; y--) {
                 if (bord[y][x] != 0 && (bord[y + 1][x] == 0 || bord[y + 1][x] == bord[y][x])) {
@@ -133,7 +133,8 @@ public class Simulator implements SimulatorInterface {
         }
         return false;
     }
-    private boolean ifmovewestpossible(){
+    
+    private boolean ifMoveWestPossible() {
         for (int y = 0; y < he; y++) {
             for (int x = 1; x < wi; x++) {
                 if (bord[y][x] != 0 && (bord[y][x - 1] == 0 || bord[y][x - 1] == bord[y][x])) {
@@ -143,7 +144,8 @@ public class Simulator implements SimulatorInterface {
         }
         return false;
     }
-    private boolean ismoveeastpossible(){
+    
+    private boolean ifMoveEastPossible() {
         for (int y = 0; y < he; y++) {
             for (int x = wi - 2; x >= 0; x--) {
                 if (bord[y][x] != 0 && (bord[y][x + 1] == 0 || bord[y][x + 1] == bord[y][x])) {
@@ -153,13 +155,6 @@ public class Simulator implements SimulatorInterface {
         }
         return false;
     }
-
-
-
-
-    
-
-
     
     @Override
     public boolean isMovePossible(MoveDirection direction) {
@@ -168,17 +163,18 @@ public class Simulator implements SimulatorInterface {
         }
         switch (direction) {
             case NORTH:
-                return ifmovenorthpossible();
+                return ifMoveNorthPossible();
             case SOUTH:
-                return ifmovesouthpossible();
+                return ifMoveSouthPossible();
             case WEST:
-                return ifmovewestpossible();
+                return ifMoveWestPossible();
             case EAST:
-                return ismoveeastpossible();
+                return ifMoveEastPossible();
             default:
                 throw new IllegalArgumentException("Unknown direction: " + direction);
         }
     }
+    
     
     @Override
     public boolean isSpaceLeft() {
