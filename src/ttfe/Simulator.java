@@ -191,107 +191,109 @@ public class Simulator implements SimulatorInterface {
 		}
 		return false;
     }
-
+    private boolean moveAndMergeLeft(int[] line) {
+        boolean moved = false;
+        int[] newLine = new int[line.length];
+        int[] merged = new int[line.length];
+        int target = 0;
+        
+        for (int i = 0; i < line.length; i++) {
+            if (line[i] != 0) {
+                if (target > 0 && newLine[target - 1] == line[i] && merged[target - 1] == 0) {
+                    newLine[target - 1] *= 2;
+                    points += newLine[target - 1];
+                    merged[target - 1] = 1;
+                    moved = true;
+                } else {
+                    newLine[target] = line[i];
+                    if (target != i) {
+                        moved = true;
+                    }
+                    target++;
+                }
+            }
+        }
+        
+        System.arraycopy(newLine, 0, line, 0, line.length);
+        return moved;
+    }
+    
     private boolean moveUp() {
         boolean moved = false;
         for (int x = 0; x < wi; x++) {
-            int[] merged = new int[he];
-            for (int y = 1; y < he; y++) {
-                if (bord[y][x] != 0) {
-                    int newY = y;
-                    while (newY > 0 && bord[newY - 1][x] == 0) {
-                        bord[newY - 1][x] = bord[newY][x];
-                        bord[newY][x] = 0;
-                        newY--;
-                        moved = true;
-                    }
-                    if (newY > 0 && bord[newY - 1][x] == bord[newY][x] && merged[newY - 1] == 0) {
-                        bord[newY - 1][x] *= 2;
-                        bord[newY][x] = 0;
-                        points += bord[newY - 1][x];
-                        merged[newY - 1] = 1;
-                        moved = true;
-                    }
-                }
+            int[] column = new int[he];
+            for (int y = 0; y < he; y++) {
+                column[y] = bord[y][x];
+            }
+            moved |= moveAndMergeLeft(column);
+            for (int y = 0; y < he; y++) {
+                bord[y][x] = column[y];
             }
         }
         return moved;
     }
+    
     private boolean moveDown() {
         boolean moved = false;
         for (int x = 0; x < wi; x++) {
-            int[] merged = new int[he];
-            for (int y = he - 2; y >= 0; y--) {
-                if (bord[y][x] != 0) {
-                    int newY = y;
-                    while (newY < he - 1 && bord[newY + 1][x] == 0) {
-                        bord[newY + 1][x] = bord[newY][x];
-                        bord[newY][x] = 0;
-                        newY++;
-                        moved = true;
-                    }
-                    if (newY < he - 1 && bord[newY + 1][x] == bord[newY][x] && merged[newY + 1] == 0) {
-                        bord[newY + 1][x] *= 2;
-                        bord[newY][x] = 0;
-                        points += bord[newY + 1][x];
-                        merged[newY + 1] = 1;
-                        moved = true;
-                    }
-                }
+            int[] column = new int[he];
+            for (int y = 0; y < he; y++) {
+                column[y] = bord[y][x];
+            }
+            reverse(column);
+            moved |= moveAndMergeLeft(column);
+            reverse(column);
+            for (int y = 0; y < he; y++) {
+                bord[y][x] = column[y];
             }
         }
         return moved;
     }
+    
     private boolean moveLeft() {
         boolean moved = false;
         for (int y = 0; y < he; y++) {
-            int[] merged = new int[wi];
-            for (int x = 1; x < wi; x++) {
-                if (bord[y][x] != 0) {
-                    int newX = x;
-                    while (newX > 0 && bord[y][newX - 1] == 0) {
-                        bord[y][newX - 1] = bord[y][newX];
-                        bord[y][newX] = 0;
-                        newX--;
-                        moved = true;
-                    }
-                    if (newX > 0 && bord[y][newX - 1] == bord[y][newX] && merged[newX - 1] == 0) {
-                        bord[y][newX - 1] *= 2;
-                        bord[y][newX] = 0;
-                        points += bord[y][newX - 1];
-                        merged[newX - 1] = 1;
-                        moved = true;
-                    }
-                }
+            int[] row = new int[wi];
+            for (int x = 0; x < wi; x++) {
+                row[x] = bord[y][x];
+            }
+            moved |= moveAndMergeLeft(row);
+            for (int x = 0; x < wi; x++) {
+                bord[y][x] = row[x];
             }
         }
         return moved;
     }
+    
     private boolean moveRight() {
         boolean moved = false;
         for (int y = 0; y < he; y++) {
-            int[] merged = new int[wi];
-            for (int x = wi - 2; x >= 0; x--) {
-                if (bord[y][x] != 0) {
-                    int newX = x;
-                    while (newX < wi - 1 && bord[y][newX + 1] == 0) {
-                        bord[y][newX + 1] = bord[y][newX];
-                        bord[y][newX] = 0;
-                        newX++;
-                        moved = true;
-                    }
-                    if (newX < wi - 1 && bord[y][newX + 1] == bord[y][newX] && merged[newX + 1] == 0) {
-                        bord[y][newX + 1] *= 2;
-                        bord[y][newX] = 0;
-                        points += bord[y][newX + 1];
-                        merged[newX + 1] = 1;
-                        moved = true;
-                    }
-                }
+            int[] row = new int[wi];
+            for (int x = 0; x < wi; x++) {
+                row[x] = bord[y][x];
+            }
+            reverse(row);
+            moved |= moveAndMergeLeft(row);
+            reverse(row);
+            for (int x = 0; x < wi; x++) {
+                bord[y][x] = row[x];
             }
         }
         return moved;
     }
+    
+    private void reverse(int[] array) {
+        int i = 0;
+        int j = array.length - 1;
+        while (i < j) {
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+            i++;
+            j--;
+        }
+    }
+    
     
 
 
