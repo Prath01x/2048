@@ -13,7 +13,12 @@ public class Simulator implements SimulatorInterface {
     private int bord[][];
   
     public Simulator(int width, int height, Random random) {
-		
+		if (width < 2 || height < 2) {
+            throw new IllegalArgumentException("Width and height must be at least 2.");
+        }
+        if (random == null) {
+            throw new IllegalArgumentException("Random object cannot be null.");
+        }
 		this.wi = width;
 		this.he = height;
 		this.ran = random;
@@ -88,6 +93,15 @@ public class Simulator implements SimulatorInterface {
     public int getPoints() {
       return points;
     }
+
+
+
+
+
+
+
+
+
     @Override
     public boolean isMovePossible() {
         for (MoveDirection direction : MoveDirection.values()) {
@@ -140,6 +154,9 @@ public class Simulator implements SimulatorInterface {
         return false;
     }
 
+
+
+
     
 
 
@@ -174,11 +191,142 @@ public class Simulator implements SimulatorInterface {
 		}
 		return false;
     }
+
+    private boolean moveUp() {
+        boolean moved = false;
+        for (int x = 0; x < wi; x++) {
+            int[] merged = new int[he];
+            for (int y = 1; y < he; y++) {
+                if (bord[y][x] != 0) {
+                    int newY = y;
+                    while (newY > 0 && bord[newY - 1][x] == 0) {
+                        bord[newY - 1][x] = bord[newY][x];
+                        bord[newY][x] = 0;
+                        newY--;
+                        moved = true;
+                    }
+                    if (newY > 0 && bord[newY - 1][x] == bord[newY][x] && merged[newY - 1] == 0) {
+                        bord[newY - 1][x] *= 2;
+                        bord[newY][x] = 0;
+                        points += bord[newY - 1][x];
+                        merged[newY - 1] = 1;
+                        moved = true;
+                    }
+                }
+            }
+        }
+        return moved;
+    }
+    private boolean moveDown() {
+        boolean moved = false;
+        for (int x = 0; x < wi; x++) {
+            int[] merged = new int[he];
+            for (int y = he - 2; y >= 0; y--) {
+                if (bord[y][x] != 0) {
+                    int newY = y;
+                    while (newY < he - 1 && bord[newY + 1][x] == 0) {
+                        bord[newY + 1][x] = bord[newY][x];
+                        bord[newY][x] = 0;
+                        newY++;
+                        moved = true;
+                    }
+                    if (newY < he - 1 && bord[newY + 1][x] == bord[newY][x] && merged[newY + 1] == 0) {
+                        bord[newY + 1][x] *= 2;
+                        bord[newY][x] = 0;
+                        points += bord[newY + 1][x];
+                        merged[newY + 1] = 1;
+                        moved = true;
+                    }
+                }
+            }
+        }
+        return moved;
+    }
+    private boolean moveLeft() {
+        boolean moved = false;
+        for (int y = 0; y < he; y++) {
+            int[] merged = new int[wi];
+            for (int x = 1; x < wi; x++) {
+                if (bord[y][x] != 0) {
+                    int newX = x;
+                    while (newX > 0 && bord[y][newX - 1] == 0) {
+                        bord[y][newX - 1] = bord[y][newX];
+                        bord[y][newX] = 0;
+                        newX--;
+                        moved = true;
+                    }
+                    if (newX > 0 && bord[y][newX - 1] == bord[y][newX] && merged[newX - 1] == 0) {
+                        bord[y][newX - 1] *= 2;
+                        bord[y][newX] = 0;
+                        points += bord[y][newX - 1];
+                        merged[newX - 1] = 1;
+                        moved = true;
+                    }
+                }
+            }
+        }
+        return moved;
+    }
+    private boolean moveRight() {
+        boolean moved = false;
+        for (int y = 0; y < he; y++) {
+            int[] merged = new int[wi];
+            for (int x = wi - 2; x >= 0; x--) {
+                if (bord[y][x] != 0) {
+                    int newX = x;
+                    while (newX < wi - 1 && bord[y][newX + 1] == 0) {
+                        bord[y][newX + 1] = bord[y][newX];
+                        bord[y][newX] = 0;
+                        newX++;
+                        moved = true;
+                    }
+                    if (newX < wi - 1 && bord[y][newX + 1] == bord[y][newX] && merged[newX + 1] == 0) {
+                        bord[y][newX + 1] *= 2;
+                        bord[y][newX] = 0;
+                        points += bord[y][newX + 1];
+                        merged[newX + 1] = 1;
+                        moved = true;
+                    }
+                }
+            }
+        }
+        return moved;
+    }
+    
+
+
+
+
+
     @Override
     public boolean performMove(MoveDirection direction) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'performMove'");
+        if (direction == null) {
+            throw new IllegalArgumentException("Direction cannot be null.");
+        }
+        boolean moved = false;
+        switch (direction) {
+            case NORTH:
+                moved = moveUp();
+                break;
+            case SOUTH:
+                moved = moveDown();
+                break;
+            case WEST:
+                moved = moveLeft();
+                break;
+            case EAST:
+                moved = moveRight();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown direction: " + direction);
+        }
+        if (moved) {
+            addPiece();
+            moveCount++;
+        }
+        return moved;
     }
+    
     @Override
     public void run(PlayerInterface player, UserInterface ui) {
         // TODO Auto-generated method stub
