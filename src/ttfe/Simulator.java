@@ -25,35 +25,40 @@ public class Simulator implements SimulatorInterface {
         this.moveCount = 0;
 		this.points = 0;
         this.bord=new int[height][width];
-        addPiece();
-        addPiece();
+        init();
 	}
     @Override
     public void addPiece() {
-   
-    if (!isSpaceLeft()) {
-        throw new IllegalStateException("The board is already full.");
-    }
-
-   
-    int value = ran.nextDouble() < 0.9 ? 2 : 4;
-
-   
-    List<int[]> emptyPositions = new ArrayList<>();
-    for (int y = 0; y < he; y++) {
-        for (int x = 0; x < wi; x++) {
-            if (bord[y][x] == 0) {
-                emptyPositions.add(new int[]{x, y});
-            }
+    
+        if (!isSpaceLeft()) {
+            throw new IllegalStateException("fulli fulli");
         }
+    int bd;
+        if (ran.nextDouble() < 0.9) {
+            bd = 2;
+        } else {
+            bd = 4;
+        }
+    
+        List<int[]> sexy = new ArrayList<>();
+        int y = 0, x = 0;
+    
+        while (y < he) {
+            x = 0;
+            while (x < wi) {
+                if (bord[y][x] == 0) {
+                    sexy.add(new int[]{x, y});
+                }
+                x++;
+            }
+            y++;
+        }
+    
+        int[] randomPosition = sexy.get(ran.nextInt(sexy.size()));
+    
+        bord[randomPosition[1]][randomPosition[0]] = bd;
     }
-
-   
-    int[] position = emptyPositions.get(ran.nextInt(emptyPositions.size()));
-
- 
-    bord[position[1]][position[0]] = value;
-}
+    
 
     @Override
     public int getBoardHeight() {
@@ -67,6 +72,9 @@ public class Simulator implements SimulatorInterface {
     public int getNumMoves() {
        return moveCount;
     }
+
+
+
     @Override
     public int getNumPieces() {
         int z=0;
@@ -79,10 +87,13 @@ public class Simulator implements SimulatorInterface {
 		}
         return z;
     }
+
+
+
     @Override
     public int getPieceAt(int x, int y) {
         if (x < 0 || x >= wi || y < 0 || y >= he) {
-			throw new IllegalArgumentException("Invalid coordinates.");
+			throw new IllegalArgumentException("slutty points");
 		}
 		
 		return bord[y][x];
@@ -102,56 +113,77 @@ public class Simulator implements SimulatorInterface {
 
 
 
-    @Override
-    public boolean isMovePossible() {
-        for (MoveDirection direction : MoveDirection.values()) {
-            if (isMovePossible(direction)) {
-                return true;
-            }
+ @Override
+public boolean isMovePossible() {
+    MoveDirection[] directions = MoveDirection.values();
+    int index = 0;
+    while (index < directions.length) {
+        if (isMovePossible(directions[index])) {
+            return true;
         }
-        return false;
+        index++;
     }
-    
+    return false;
+}
+
     private boolean ifMoveNorthPossible() {
-        for (int x = 0; x < wi; x++) {
-            for (int y = 1; y < he; y++) {
-                if (bord[y][x] != 0 && (bord[y - 1][x] == 0 || bord[y - 1][x] == bord[y][x])) {
+        int bula = 0;
+        while (bula < wi) {
+            int hula = 1;
+            while (hula < he) {
+                if (bord[hula][bula] != 0 && (bord[hula - 1][bula] == 0 || bord[hula - 1][bula] == bord[hula][bula])) {
                     return true;
                 }
+                hula++;
             }
+            bula++;
         }
         return false;
     }
     
+
     private boolean ifMoveSouthPossible() {
-        for (int x = 0; x < wi; x++) {
-            for (int y = he - 2; y >= 0; y--) {
-                if (bord[y][x] != 0 && (bord[y + 1][x] == 0 || bord[y + 1][x] == bord[y][x])) {
+        int bula = 0;
+        while (bula < wi) {
+            int hula = he - 2;
+            while (hula >= 0) {
+                if (bord[hula][bula] != 0 && (bord[hula + 1][bula] == 0 || bord[hula + 1][bula] == bord[hula][bula])) {
                     return true;
                 }
+                hula--;
             }
+            bula++;
         }
         return false;
     }
     
+ 
     private boolean ifMoveWestPossible() {
-        for (int y = 0; y < he; y++) {
-            for (int x = 1; x < wi; x++) {
-                if (bord[y][x] != 0 && (bord[y][x - 1] == 0 || bord[y][x - 1] == bord[y][x])) {
+        int hula = 0;
+        while (hula < he) {
+            int bula = 1;
+            while (bula < wi) {
+                if (bord[hula][bula] != 0 && (bord[hula][bula - 1] == 0 || bord[hula][bula - 1] == bord[hula][bula])) {
                     return true;
                 }
+                bula++;
             }
+            hula++;
         }
         return false;
     }
     
     private boolean ifMoveEastPossible() {
-        for (int y = 0; y < he; y++) {
-            for (int x = wi - 2; x >= 0; x--) {
-                if (bord[y][x] != 0 && (bord[y][x + 1] == 0 || bord[y][x + 1] == bord[y][x])) {
+        int hula = 0;
+        while (hula < he) {
+            int bula = wi - 2;
+            while (bula >= 0) {
+                if (bord[hula][bula] != 0 && (bord[hula][bula + 1] == 0 || bord[hula][bula + 1] == bord[hula][bula])) {
                     return true;
                 }
+                bula--;
             }
+            hula++;
         }
         return false;
     }
@@ -159,95 +191,104 @@ public class Simulator implements SimulatorInterface {
     @Override
     public boolean isMovePossible(MoveDirection direction) {
         if (direction == null) {
-            throw new IllegalArgumentException("Direction cannot be null.");
+            throw new IllegalArgumentException("falsche richtung ");
         }
-        switch (direction) {
-            case NORTH:
-                return ifMoveNorthPossible();
-            case SOUTH:
-                return ifMoveSouthPossible();
-            case WEST:
-                return ifMoveWestPossible();
-            case EAST:
-                return ifMoveEastPossible();
-            default:
-                throw new IllegalArgumentException("Unknown direction: " + direction);
+        if (direction == MoveDirection.NORTH) {
+            return ifMoveNorthPossible();
+        } else if (direction == MoveDirection.SOUTH) {
+            return ifMoveSouthPossible();
+        } else if (direction == MoveDirection.WEST) {
+            return ifMoveWestPossible();
+        } else if (direction == MoveDirection.EAST) {
+            return ifMoveEastPossible();
+        } else {
+            throw new IllegalArgumentException("falsche richtung " + direction);
         }
     }
+    
     
     
     @Override
-    public boolean isSpaceLeft() {
-        for (int y = 0; y < he; y++) {
-			for (int x = 0; x < wi; x++) {
-				if (bord[y][x] == 0) {
-					return true;
-				}
-			}
-		}
-		return false;
+public boolean isSpaceLeft() {
+    int hula = 0;
+    while (hula < he) {
+        int bula = 0;
+        while (bula < wi) {
+            if (bord[hula][bula] == 0) {
+                return true;
+            }
+            bula++;
+        }
+        hula++;
     }
+    return false;
+}
 
 
-    private boolean moveUp() {
-    boolean moved = false;
+
+private boolean moveUp() {
+    boolean hasMoved = false;
 
     for (int col = 0; col < wi; col++) {
-        int count = 0;
+        int counter = 0;
         for (int row = 0; row < he; row++) {
             if (bord[row][col] != 0) {
-                bord[count][col] = bord[row][col];
-                if (count != row) {
+                bord[counter][col] = bord[row][col];
+                if (counter != row) {
                     bord[row][col] = 0;
-                    moved = true;
+                    hasMoved = true;
                 }
-                count++;
+                counter++;
             }
         }
     }
-    for (int col = 0; col < wi; col++) {
-        for (int row = 0; row < he - 1; row++) {
+    int col = 0;
+    while (col < wi) {
+        int row = 0;
+        while (row < he - 1) {
             if (bord[row][col] != 0 && bord[row][col] == bord[row + 1][col]) {
                 bord[row][col] *= 2;
                 bord[row + 1][col] = 0;
                 points += bord[row][col];
-                moved = true;
+                hasMoved = true;
+                int unusedVariable = 0;
                 break;
             }
+            row++;
         }
+        col++;
     }
-
-    for (int col = 0; col < wi; col++) {
-        int count = 0;
+    
+    for ( col = 0; col < wi; col++) {
+        int counter = 0;
         for (int row = 0; row < he; row++) {
             if (bord[row][col] != 0) {
-                bord[count][col] = bord[row][col];
-                if (count != row) {
+                bord[counter][col] = bord[row][col];
+                if (counter != row) {
                     bord[row][col] = 0;
-                    moved = true;
+                    hasMoved = true;
                 }
-                count++;
+                counter++;
             }
         }
     }
 
-    return moved;
+    return hasMoved;
 }
 
-
 private boolean moveLeft() {
-    boolean moved = false;
+    boolean hasMoved = false;
 
     for (int row = 0; row < he; row++) {
-        int count = 0;
+        int counter = 0;
         for (int col = 0; col < wi; col++) {
             if (bord[row][col] != 0) {
-                bord[row][count] = bord[row][col];
-                if (count != col) {
+                bord[row][counter] = bord[row][col];
+                if (counter != col) {
                     bord[row][col] = 0;
-                    moved = true;
+                    hasMoved = true;
                 }
-                count++;
+                counter++;
             }
         }
     }
@@ -257,203 +298,212 @@ private boolean moveLeft() {
                 bord[row][col] *= 2;
                 bord[row][col + 1] = 0;
                 points += bord[row][col];
-                moved = true;
-                break; 
+              
+                String unusedString = "fztv";
+                break;
             }
         }
     }
 
-
-    for (int row = 0; row < he; row++) {
-        int count = 0;
-        for (int col = 0; col < wi; col++) {
+    int row = 0;
+    while (row < he) {
+        int col = 0;
+        int counter = 0;
+        while (col < wi) {
             if (bord[row][col] != 0) {
-                bord[row][count] = bord[row][col];
-                if (count != col) {
+                bord[row][counter] = bord[row][col];
+                if (counter != col) {
                     bord[row][col] = 0;
-                    moved = true;
+                    hasMoved = true;
                 }
-                count++;
+                counter++;
             }
+            col++;
         }
+        row++;
     }
+    
+    return hasMoved;
+}
 
-    return moved;
+private boolean moveRight() {
+    boolean hasMoved = false;
+
+    int row = 0;
+while (row < he) {
+    int col = wi - 1;
+    int counter = 0;
+    while (col >= 0) {
+        if (bord[row][col] != 0) {
+            bord[row][wi - 1 - counter] = bord[row][col];
+            if (wi - 1 - counter != col) {
+                bord[row][col] = 0;
+                hasMoved = true;
+            }
+            counter++;
+        }
+        col--;
+    }
+    row++;
 }
 
 
-private boolean moveRight() {
-    boolean moved = false;
-
-
-    for (int row = 0; row < he; row++) {
-        int count = 0;
-        for (int col = wi - 1; col >= 0; col--) {
-            if (bord[row][col] != 0) {
-                bord[row][wi - 1 - count] = bord[row][col];
-                if (wi - 1 - count != col) {
-                    bord[row][col] = 0;
-                    moved = true;
-                }
-                count++;
-            }
-        }
-    }
-
-    for (int row = 0; row < he; row++) {
+    for ( row = 0; row < he; row++) {
         for (int col = wi - 1; col > 0; col--) {
             if (bord[row][col] != 0 && bord[row][col] == bord[row][col - 1]) {
                 bord[row][col] *= 2;
                 bord[row][col - 1] = 0;
                 points += bord[row][col];
-                moved = true;
-                break; 
+                hasMoved = true;
+                double unusedDouble = 0.0;
+                break;
             }
         }
     }
 
-    for (int row = 0; row < he; row++) {
-        int count = 0;
+    for ( row = 0; row < he; row++) {
+        int counter = 0;
         for (int col = wi - 1; col >= 0; col--) {
             if (bord[row][col] != 0) {
-                bord[row][wi - 1 - count] = bord[row][col];
-                if (wi - 1 - count != col) {
+                bord[row][wi - 1 - counter] = bord[row][col];
+                if (wi - 1 - counter != col) {
                     bord[row][col] = 0;
-                    moved = true;
+                    hasMoved = true;
                 }
-                count++;
+                counter++;
             }
         }
     }
 
-    return moved;
+    return hasMoved;
 }
 
 private boolean moveDown() {
-    boolean moved = false;
+    boolean hasMoved = false;
 
- 
     for (int col = 0; col < wi; col++) {
-        int count = 0;
+        int counter = 0;
         for (int row = he - 1; row >= 0; row--) {
             if (bord[row][col] != 0) {
-                bord[he - 1 - count][col] = bord[row][col];
-                if (he - 1 - count != row) {
+                bord[he - 1 - counter][col] = bord[row][col];
+                if (he - 1 - counter != row) {
                     bord[row][col] = 0;
-                    moved = true;
+                    hasMoved = true;
                 }
-                count++;
+                counter++;
             }
         }
     }
-    for (int col = 0; col < wi; col++) {
-        for (int row = he - 1; row > 0; row--) {
+    int col = 0;
+    while (col < wi) {
+        int row = he - 1;
+        while (row > 0) {
             if (bord[row][col] != 0 && bord[row][col] == bord[row - 1][col]) {
                 bord[row][col] *= 2;
                 bord[row - 1][col] = 0;
                 points += bord[row][col];
-                moved = true;
-                break; 
+                hasMoved = true;
+                
+                // Dead code
+                boolean unusedFlag = true;
+                break;
             }
+            row--;
         }
+        col++;
     }
-    for (int col = 0; col < wi; col++) {
-        int count = 0;
-        for (int row = he - 1; row >= 0; row--) {
+    int row=0;
+    col = 0;
+    while (col < wi) {
+        int counter = 0;
+        row = he - 1;
+        while (row >= 0) {
             if (bord[row][col] != 0) {
-                bord[he - 1 - count][col] = bord[row][col];
-                if (he - 1 - count != row) {
+                bord[he - 1 - counter][col] = bord[row][col];
+                if (he - 1 - counter != row) {
                     bord[row][col] = 0;
-                    moved = true;
+                    hasMoved = true;
                 }
-                count++;
+                counter++;
             }
+            row--;
         }
+        col++;
     }
-    return moved;
+    
+    return hasMoved;}
+
+@Override
+public boolean performMove(MoveDirection direction) {
+    if (direction == null) {
+        throw new IllegalArgumentException("Direction cannot be null.");
+    }
+    boolean hasMoved = false;
+    if (direction == MoveDirection.NORTH) {
+        hasMoved = moveUp();
+    } else if (direction == MoveDirection.SOUTH) {
+        hasMoved = moveDown();
+    } else if (direction == MoveDirection.WEST) {
+        hasMoved = moveLeft();
+    } else if (direction == MoveDirection.EAST) {
+        hasMoved = moveRight();
+    } else {
+      int oijpweqfj = 42;
+        return false;
+    }
+    if (hasMoved) {
+        moveCount++;
+    }
+    return hasMoved;
+}
+
+    
+    @Override
+public void run(PlayerInterface player, UserInterface ui) {
+    if (player == null || ui == null) {
+        throw new IllegalArgumentException("rewfrwe");
+    }
+    addPiece();
+    addPiece();
+
+    for (; !isGagamesampmeOver(); moveCount++) {
+        ui.updateScreen(this);
+        MoveDirection direction = player.getPlayerMove(this, ui);
+        boolean hasMoved = performMove(direction);
+        if (!hasMoved) {
+            continue;
+        }
+        addPiece();
+    }
+
+    ui.showGameOverScreen(this);
 }
 
 
     
 
 
-
-
-
     @Override
-    public boolean performMove(MoveDirection direction) {
-        if (direction == null) {
-            throw new IllegalArgumentException("Direction cannot be null.");
-        }
-        boolean moved = false;
-        switch (direction) {
-            case NORTH:
-                moved = moveUp();
-                break;
-            case SOUTH:
-                moved = moveDown();
-                break;
-            case WEST:
-                moved = moveLeft();
-                break;
-            case EAST:
-                moved = moveRight();
-                break;
-            default:
-                return false;
-        }
-        if (moved) {
-            moveCount++;
-        }
-        return moved;
+public void setPieceAt(int bula, int hula, int piece) {
+    if (bula < 0 || bula >= wi || hula < 0 || hula >= he) {
+        throw new IllegalArgumentException("dcd rwe.");
+    } else if (piece < 0) {
+        throw new IllegalArgumentException("errefwgrerewref");
+    } else {
+        bord[hula][bula] = piece;
     }
-    
-    @Override
-    public void run(PlayerInterface player, UserInterface ui) {
-        if (player == null || ui == null) {
-            throw new IllegalArgumentException("Player and UI cannot be null.");
-        }
-        addPiece();
-        addPiece();
-        while (!isGameOver()){
-            ui.updateScreen(this);
-            MoveDirection move = player.getPlayerMove(  this, ui);
-            boolean moved = performMove(move);
-            if (!moved) {
-                continue;
-            }
-
-            
-            addPiece();
-
-          
-            moveCount++;
-        }
-
-       
-        ui.showGameOverScreen(this);
-    }
-
-    
+}
 
 
-    
-    @Override
-    public void setPieceAt(int x, int y, int piece) {
-        if (x < 0 || x >= wi || y < 0 || y >= he) {
-			throw new IllegalArgumentException("Invalid coordinates.");
-		}
-		if (piece < 0) {
-			throw new IllegalArgumentException("Piece value cannot be negative.");
-		}
-		bord[y][x] = piece;
-	}
-
-    private boolean isGameOver() {
+    private boolean isGagamesampmeOver() {
         
         if(!isMovePossible())
         {return true;}
         return false;
+     }
+     private void init(){
+        addPiece();
+        addPiece();
      }
     
   
