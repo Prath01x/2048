@@ -412,7 +412,7 @@ private boolean moveLeft() {
                 bord[row][col + 1] = 0;
                 points += bord[row][col];
                 moved = true;
-                break; // Make sure to break after the first merge
+              
             }
         }
     }
@@ -462,7 +462,7 @@ private boolean moveRight() {
                 bord[row][col - 1] = 0;
                 points += bord[row][col];
                 moved = true;
-                break; // Make sure to break after the first merge
+                
             }
         }
     }
@@ -511,7 +511,7 @@ private boolean moveDown() {
                 bord[row - 1][col] = 0;
                 points += bord[row][col];
                 moved = true;
-                break; // Make sure to break after the first merge
+                
             }
         }
     }
