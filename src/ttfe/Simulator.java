@@ -400,10 +400,10 @@ private boolean moveDown() {
                 moved = moveRight();
                 break;
             default:
-                throw new IllegalArgumentException("Unknown direction: " + direction);
+                return false;
         }
         if (moved) {
-            addPiece();
+
             moveCount++;
         }
         return moved;
