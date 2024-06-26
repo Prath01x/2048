@@ -1,7 +1,5 @@
 package ttfe;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Computerp implements PlayerInterface {
@@ -40,13 +38,13 @@ public class Computerp implements PlayerInterface {
     private MoveDirection reverseDirection(MoveDirection direction) {
         switch (direction) {
             case NORTH:
-                return MoveDirection.NORTH;
-            case SOUTH:
                 return MoveDirection.SOUTH;
+            case SOUTH:
+                return MoveDirection.NORTH;
             case WEST:
-                return MoveDirection.WEST;
-            case EAST:
                 return MoveDirection.EAST;
+            case EAST:
+                return MoveDirection.WEST;
             default:
                 throw new IllegalArgumentException("Invalid direction: " + direction);
         }
