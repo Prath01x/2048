@@ -48,9 +48,11 @@ public class TTFEFactory {
 		if (human) {
 			return new HumanPlayer();
 		} 
+		else {
+            return new Computerp();
+        }
 		
-		// TODO: Implement me. Return a computer player instance.
-		return null;
+		
 	}
 
 }
