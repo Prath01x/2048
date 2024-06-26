@@ -14,10 +14,10 @@ public class Simulator implements SimulatorInterface {
   
     public Simulator(int width, int height, Random random) {
 		if (width < 2 || height < 2) {
-            throw new IllegalArgumentException("Width and height must be at least 2.");
+            throw new IllegalArgumentException("tgrwgrdetfgrvstf.");
         }
         if (random == null) {
-            throw new IllegalArgumentException("Random object cannot be null.");
+            throw new IllegalArgumentException("fgsdfdaserfrset");
         }
 		this.wi = width;
 		this.he = height;
