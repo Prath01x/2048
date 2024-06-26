@@ -340,7 +340,6 @@ private boolean moveRight() {
 */private boolean moveUp() {
     boolean moved = false;
 
-    // First pass: move all tiles up to fill empty spaces
     for (int col = 0; col < wi; col++) {
         int count = 0;
         for (int row = 0; row < he; row++) {
@@ -354,8 +353,6 @@ private boolean moveRight() {
             }
         }
     }
-
-    // Second pass: merge tiles
     for (int col = 0; col < wi; col++) {
         for (int row = 0; row < he - 1; row++) {
             if (bord[row][col] != 0 && bord[row][col] == bord[row + 1][col]) {
@@ -363,11 +360,11 @@ private boolean moveRight() {
                 bord[row + 1][col] = 0;
                 points += bord[row][col];
                 moved = true;
+                break;
             }
         }
     }
 
-    // Third pass: move again to fill empty spaces created by merges
     for (int col = 0; col < wi; col++) {
         int count = 0;
         for (int row = 0; row < he; row++) {
@@ -389,7 +386,6 @@ private boolean moveRight() {
 private boolean moveLeft() {
     boolean moved = false;
 
-    // First pass: move all tiles left to fill empty spaces
     for (int row = 0; row < he; row++) {
         int count = 0;
         for (int col = 0; col < wi; col++) {
@@ -403,8 +399,6 @@ private boolean moveLeft() {
             }
         }
     }
-
-    // Second pass: merge tiles
     for (int row = 0; row < he; row++) {
         for (int col = 0; col < wi - 1; col++) {
             if (bord[row][col] != 0 && bord[row][col] == bord[row][col + 1]) {
@@ -412,12 +406,12 @@ private boolean moveLeft() {
                 bord[row][col + 1] = 0;
                 points += bord[row][col];
                 moved = true;
-              
+                break; 
             }
         }
     }
 
-    // Third pass: move again to fill empty spaces created by merges
+
     for (int row = 0; row < he; row++) {
         int count = 0;
         for (int col = 0; col < wi; col++) {
@@ -439,7 +433,7 @@ private boolean moveLeft() {
 private boolean moveRight() {
     boolean moved = false;
 
-    // First pass: move all tiles right to fill empty spaces
+
     for (int row = 0; row < he; row++) {
         int count = 0;
         for (int col = wi - 1; col >= 0; col--) {
@@ -454,7 +448,6 @@ private boolean moveRight() {
         }
     }
 
-    // Second pass: merge tiles
     for (int row = 0; row < he; row++) {
         for (int col = wi - 1; col > 0; col--) {
             if (bord[row][col] != 0 && bord[row][col] == bord[row][col - 1]) {
@@ -462,12 +455,11 @@ private boolean moveRight() {
                 bord[row][col - 1] = 0;
                 points += bord[row][col];
                 moved = true;
-                
+                break; 
             }
         }
     }
 
-    // Third pass: move again to fill empty spaces created by merges
     for (int row = 0; row < he; row++) {
         int count = 0;
         for (int col = wi - 1; col >= 0; col--) {
@@ -488,7 +480,7 @@ private boolean moveRight() {
 private boolean moveDown() {
     boolean moved = false;
 
-    // First pass: move all tiles down to fill empty spaces
+ 
     for (int col = 0; col < wi; col++) {
         int count = 0;
         for (int row = he - 1; row >= 0; row--) {
@@ -502,8 +494,6 @@ private boolean moveDown() {
             }
         }
     }
-
-    // Second pass: merge tiles
     for (int col = 0; col < wi; col++) {
         for (int row = he - 1; row > 0; row--) {
             if (bord[row][col] != 0 && bord[row][col] == bord[row - 1][col]) {
@@ -511,12 +501,10 @@ private boolean moveDown() {
                 bord[row - 1][col] = 0;
                 points += bord[row][col];
                 moved = true;
-                
+                break; 
             }
         }
     }
-
-    // Third pass: move again to fill empty spaces created by merges
     for (int col = 0; col < wi; col++) {
         int count = 0;
         for (int row = he - 1; row >= 0; row--) {
@@ -530,7 +518,6 @@ private boolean moveDown() {
             }
         }
     }
-
     return moved;
 }
 
