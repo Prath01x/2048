@@ -689,8 +689,8 @@ public void ifboardvolll(){
 		}}
 		assertThrows(IllegalStateException.class,()->{game.addPiece();});
 }
-
 }
+
 
 
 
