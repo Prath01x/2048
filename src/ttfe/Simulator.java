@@ -403,7 +403,6 @@ private boolean moveDown() {
                 return false;
         }
         if (moved) {
-
             moveCount++;
         }
         return moved;
@@ -411,9 +410,34 @@ private boolean moveDown() {
     
     @Override
     public void run(PlayerInterface player, UserInterface ui) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'run'");
+        if (player == null || ui == null) {
+            throw new IllegalArgumentException("Player and UI cannot be null.");
+        }
+        addPiece();
+        addPiece();
+        while (!isGameOver()){
+            ui.updateScreen(this);
+            MoveDirection move = player.getPlayerMove(  this, ui);
+            boolean moved = performMove(move);
+            if (!moved) {
+                continue;
+            }
+
+            
+            addPiece();
+
+          
+            moveCount++;
+        }
+
+       
+        ui.showGameOverScreen(this);
     }
+
+    
+
+
+    
     @Override
     public void setPieceAt(int x, int y, int piece) {
         if (x < 0 || x >= wi || y < 0 || y >= he) {
@@ -425,5 +449,10 @@ private boolean moveDown() {
 		bord[y][x] = piece;
 	}
 
-    
+    private boolean isGameOver() {
+        
+        if(!isMovePossible())
+        {return true;}
+        return false;
+     }
 }
